@@ -3,9 +3,7 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.*;
-
 import Other.P3Style;
 
 public class UiDiscWindow extends JPanel {

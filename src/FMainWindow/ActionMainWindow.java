@@ -2,7 +2,7 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import FContWindow.ContinuousWindow;
 import FDiscWindow.DiscreteWindow;
 
 public class ActionMainWindow implements ActionListener{
@@ -23,15 +23,15 @@ public class ActionMainWindow implements ActionListener{
 
         switch (action) {
             case "startDiscPressed":
-                DiscreteWindow win1 = new DiscreteWindow("Win2");
-                win1.setVisible(true);
-                break;
+                DiscreteWindow discWindow = new DiscreteWindow("Diskrete Daten");
+                discWindow.setVisible(true);
 
             case "startContPressed":
-                break;
+                ContinuousWindow contWindow = new ContinuousWindow("Stetige Daten");
+                contWindow.setVisible(true);
 
             case "exit":
-                System.out.println("Programm wird beendet");
+                System.out.println("Programm wird beendet FMAIN");
                 System.exit(1);
         
             default:
