@@ -3,6 +3,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import FDiscWindow.DiscreteWindow;
+
 public class ActionMainWindow implements ActionListener{
     private static ActionMainWindow instance = null;
 
@@ -21,6 +23,8 @@ public class ActionMainWindow implements ActionListener{
 
         switch (action) {
             case "startDiscPressed":
+                DiscreteWindow win1 = new DiscreteWindow();
+                win1.setVisible(true);
                 break;
 
             case "startContPressed":

@@ -1,4 +1,5 @@
-﻿public class P3WindowToViewport {
+﻿package Other;
+public class P3WindowToViewport {
     private double minX = 0;
     private double minY = 0;
     private double winWidth = 0;
