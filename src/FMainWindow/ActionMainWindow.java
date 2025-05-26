@@ -23,7 +23,7 @@ public class ActionMainWindow implements ActionListener{
 
         switch (action) {
             case "startDiscPressed":
-                DiscreteWindow win1 = new DiscreteWindow();
+                DiscreteWindow win1 = new DiscreteWindow("Win2");
                 win1.setVisible(true);
                 break;
 

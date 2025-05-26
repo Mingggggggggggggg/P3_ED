@@ -11,8 +11,8 @@ import Other.P3Style;
 public class UiDiscWindow extends JPanel {
     ActionDiscWindow adw = ActionDiscWindow.getInstance();
 
-    private JButton startButton = new JButton("startDisc");
-    private JTextField pathField = new JTextField("Pfad hier eingeben");
+    private JButton startButton = new JButton("Start");
+    private JTextField pathField = new JTextField("Dateipfad hier");
     private JLabel dataMerkmal = new JLabel();
     private JLabel dataUrliste = new JLabel();
     private JTable dataTable = new JTable();
@@ -23,7 +23,7 @@ public class UiDiscWindow extends JPanel {
     private GridBagConstraints rules = new GridBagConstraints();
 
     public UiDiscWindow() {
-        startButton.setActionCommand("startDiscPressed");
+        startButton.setActionCommand("1");
         startButton.addActionListener(adw);
         startButton.setFont(P3Style.BUTTON_FONT);
 
