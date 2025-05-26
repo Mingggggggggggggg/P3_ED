@@ -1,4 +1,4 @@
-﻿package ContWindow;
+﻿package FContWindow;
 public class ContinuousWindow {
     
 }

@@ -1,4 +1,4 @@
-﻿package DiscWindow;
+﻿package FDiscWindow;
 
 public class UiDiscWindow {
     
