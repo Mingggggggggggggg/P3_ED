@@ -12,13 +12,13 @@ public class UiContWindow extends JPanel {
     
     ActionDiscWindow adw = ActionDiscWindow.getInstance();
 
-    private JButton startButton = new JButton("startDisc");
-    private JTextField pathField = new JTextField("Pfad hier eingeben");
-    private JLabel dataMerkmal = new JLabel();
-    private JLabel dataUrliste = new JLabel();
+    private JButton startButton = new JButton("Start");
+    private JTextField pathField = new JTextField("Dateipfad hier");
+    private JLabel dataMerkmal = new JLabel("MERKMAL HIER");
+    private JLabel dataUrliste = new JLabel("Urliste: ");
     private JTable dataTable = new JTable();
-    private JLabel dataAverage = new JLabel();
-    private JLabel dataVariance = new JLabel();
+    private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
+    private JLabel dataVariance = new JLabel("Empirische Standardabweichung: ");
     private JPanel dataDiagram = new JPanel();
 
     private GridBagConstraints rules = new GridBagConstraints();

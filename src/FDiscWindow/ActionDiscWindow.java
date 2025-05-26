@@ -20,8 +20,8 @@ public class ActionDiscWindow implements ActionListener{
         String action = e.getActionCommand();
 
         switch (action) {
-            case "value":
-                
+            case "startDiscMaths":
+                System.err.println("Mathe Mathe Mathe Mathe Mathe Mathe");
                 break;
         
             default:
