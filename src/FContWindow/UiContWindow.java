@@ -36,7 +36,7 @@ public class UiContWindow extends JPanel {
     private JButton openDialog = new JButton("Select file");
     private JLabel dataMerkmal = new JLabel("MERKMAL HIER");
     private JLabel dataUrliste = new JLabel("Urliste: ");
-    private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
+    private JLabel tableLabel = new JLabel("Klassentabelle:");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
