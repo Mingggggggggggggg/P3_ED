@@ -1,5 +1,5 @@
 ﻿package LogicMath.contData;
 
-public class readContData {
+public class ContDataReader {
     
 }

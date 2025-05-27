@@ -1,6 +1,8 @@
 ## P3_ED
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Dies ist das Programm zur ED in P3, die Datensätze sind entnommen aus:
+- `discData` gesammelt aus 50 Würfelwürfen in Google: https://g.co/kgs/kwKWKJx
+- `contData` aus: https://www.wetter.com/wetter_aktuell/rueckblick/deutschland/wilhelmshaven/DE0011631.html?sid=E043&timeframe=30d
 
 ## Ordner Struktur
 

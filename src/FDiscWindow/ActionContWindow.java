@@ -2,6 +2,7 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ActionContWindow implements ActionListener{
     private static ActionContWindow instance = null;
@@ -21,7 +22,11 @@ public class ActionContWindow implements ActionListener{
 
         switch (action) {
             case "startDiscMaths":
-                System.err.println("Mathe Mathe Mathe Mathe Mathe Mathe");
+                try {
+                    System.out.println(LogicMath.DataCharacteristics.getDiscDataName("discData.p3"));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 break;
         
             default:
