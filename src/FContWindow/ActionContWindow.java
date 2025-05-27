@@ -20,8 +20,8 @@ public class ActionContWindow implements ActionListener{
         String action = e.getActionCommand();
 
         switch (action) {
-            case "value":
-                
+            case "startContMaths":
+                System.err.println("Stetige Daten Mathe");
                 break;
         
             default:

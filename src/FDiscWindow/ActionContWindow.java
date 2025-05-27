@@ -3,16 +3,16 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ActionDiscWindow implements ActionListener{
-    private static ActionDiscWindow instance = null;
+public class ActionContWindow implements ActionListener{
+    private static ActionContWindow instance = null;
 
-    public static ActionDiscWindow getInstance() {
+    public static ActionContWindow getInstance() {
         if (instance == null) {
-            instance = new ActionDiscWindow();
+            instance = new ActionContWindow();
         }
         return instance;
     }
-    private ActionDiscWindow() {
+    private ActionContWindow() {
     }
 
     @Override

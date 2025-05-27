@@ -10,7 +10,7 @@ public class MainWindow extends JFrame {
         super(title);
 
         this.setSize(200, 200);
-        this.setResizable(true);
+        this.setResizable(false);
         this.setLocation(500, 100);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
