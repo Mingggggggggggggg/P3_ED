@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class DataCharacteristics {
-        public static String getDiscDataName(String name) throws IOException {
+        public static String getDataName(String name) throws IOException {
         FileReader in = null;
         BufferedReader br = null;
         String s = "";

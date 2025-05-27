@@ -1,4 +1,4 @@
-﻿package FContWindow;
+﻿package FDiscWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,16 +6,16 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 
-public class ActionContWindow implements ActionListener{
-    private static ActionContWindow instance = null;
+public class ActionDiscWindow implements ActionListener{
+    private static ActionDiscWindow instance = null;
 
-    public static ActionContWindow getInstance() {
+    public static ActionDiscWindow getInstance() {
         if (instance == null) {
-            instance = new ActionContWindow();
+            instance = new ActionDiscWindow();
         }
         return instance;
     }
-    private ActionContWindow() {
+    private ActionDiscWindow() {
     }
 
     @Override
@@ -23,9 +23,9 @@ public class ActionContWindow implements ActionListener{
         String action = e.getActionCommand();
 
         switch (action) {
-            case "startContMaths":
+            case "startDiscMaths":
                 try {
-                    System.out.println(LogicMath.DataCharacteristics.getDataName("ContData.p3"));
+                    System.out.println(LogicMath.DataCharacteristics.getDataName("discData.p3"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -38,12 +38,12 @@ public class ActionContWindow implements ActionListener{
                 if (response == JFileChooser.APPROVE_OPTION) {
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                     System.out.println(file);
-                    UiContWindow.getInstance().setPathField(file.toString());
+                    UiDiscWindow.getInstance().setPathField(file.toString());
                 }
 
                 break;
             default:
-                throw new UnsupportedOperationException("Unbekannte Eingabe 'actionPerformed' in ActionContWindow");
+                throw new UnsupportedOperationException("Unbekannte Eingabe 'actionPerformed' in ActionDiscWindow");
         }
 
     }

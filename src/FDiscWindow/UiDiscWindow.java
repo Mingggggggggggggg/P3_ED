@@ -9,7 +9,15 @@ import javax.swing.*;
 import Other.P3Style;
 
 public class UiDiscWindow extends JPanel {
-    ActionContWindow adw = ActionContWindow.getInstance();
+    private static UiDiscWindow instance;
+
+    public static UiDiscWindow getInstance() {
+        if (instance == null) {
+            instance = new UiDiscWindow();
+        }
+        return instance;
+    }
+    ActionDiscWindow adw = ActionDiscWindow.getInstance();
     String[] columnNames = {
         "1", "2", "3", "4", "5", "6"
     };
@@ -20,7 +28,12 @@ public class UiDiscWindow extends JPanel {
 
 
     private JButton startButton = new JButton("Start");
-    private JTextField pathField = new JTextField("Dateipfad hier");
+    private JLabel pathField = new JLabel("Datei auswählen");
+    public void setPathField(String path) {
+        this.pathField.setText(path);
+    }
+
+    private JButton openDialog = new JButton("Select file");
     private JLabel dataMerkmal = new JLabel("MERKMAL HIER");
     private JLabel dataUrliste = new JLabel("Urliste: ");
     private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
@@ -32,22 +45,26 @@ public class UiDiscWindow extends JPanel {
 
     private GridBagConstraints rules = new GridBagConstraints();
 
-    public UiDiscWindow() {
+    private UiDiscWindow() {
         startButton.setActionCommand("startDiscMaths");
         startButton.addActionListener(adw);
         startButton.setFont(P3Style.BUTTON_FONT);
 
+        openDialog.setActionCommand("openFile");
+        openDialog.addActionListener(adw);
+
 
         rules.gridx = 0;
         rules.gridy = 0;
-        rules.weightx = 1;
+        //rules.weightx = 1;
         rules.insets = new Insets(5, 5, 5, 5);
-        //rules.fill = GridBagConstraints.FIRST_LINE_START;
+        rules.anchor = GridBagConstraints.FIRST_LINE_START;
 
         this.setLayout(new GridBagLayout());
         
         this.add(startButton, rules);
 
+    
         rules.gridx = 1;
         rules.anchor = GridBagConstraints.NORTHWEST;
         rules.fill = GridBagConstraints.HORIZONTAL;
@@ -56,10 +73,19 @@ public class UiDiscWindow extends JPanel {
         rules.gridx = 0;
         rules.weighty = 0;
         rules.gridy = 1;
-        //rules.fill = GridBagConstraints.NONE;
+        rules.fill = GridBagConstraints.NONE;
+        //this.add(pathField, rules);
+        this.add(openDialog, rules);
+
+        rules.gridx = 1;
+        rules.weightx = 1;
+        rules.fill = GridBagConstraints.HORIZONTAL;
         this.add(pathField, rules);
 
+        rules.gridx = 0;
         rules.gridy = 2;
+        rules.weightx = 0;
+        rules.fill = GridBagConstraints.NONE;
         this.add(dataUrliste, rules);
 
         rules.gridy = 3;

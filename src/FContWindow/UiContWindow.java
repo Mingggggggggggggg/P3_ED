@@ -5,18 +5,19 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import Other.P3Style;
 
 public class UiContWindow extends JPanel {
-    
-    ActionContWindow acw = ActionContWindow.getInstance();
+    private static UiContWindow instance;
 
+    public static UiContWindow getInstance() {
+        if (instance == null) {
+            instance = new UiContWindow();
+        }
+        return instance;
+    }
+    ActionContWindow acw = ActionContWindow.getInstance();
     String[] columnNames = {
         "1", "2", "3", "4", "5", "6"
     };
@@ -25,11 +26,17 @@ public class UiContWindow extends JPanel {
         {2, 5, 2, 1, 1, 4, 3, 6, 1, 3}
     };
 
+
     private JButton startButton = new JButton("Start");
-    private JTextField pathField = new JTextField("Dateipfad hier");
+    private JLabel pathField = new JLabel("Datei auswählen");
+    public void setPathField(String path) {
+        this.pathField.setText(path);
+    }
+
+    private JButton openDialog = new JButton("Select file");
     private JLabel dataMerkmal = new JLabel("MERKMAL HIER");
     private JLabel dataUrliste = new JLabel("Urliste: ");
-    private JLabel tableLabel = new JLabel("Klassentabelle");
+    private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
@@ -38,22 +45,26 @@ public class UiContWindow extends JPanel {
 
     private GridBagConstraints rules = new GridBagConstraints();
 
-    public UiContWindow() {
+    private UiContWindow() {
         startButton.setActionCommand("startContMaths");
         startButton.addActionListener(acw);
         startButton.setFont(P3Style.BUTTON_FONT);
 
+        openDialog.setActionCommand("openFile");
+        openDialog.addActionListener(acw);
+
 
         rules.gridx = 0;
         rules.gridy = 0;
-        rules.weightx = 1;
+        //rules.weightx = 1;
         rules.insets = new Insets(5, 5, 5, 5);
-        //rules.fill = GridBagConstraints.FIRST_LINE_START;
+        rules.anchor = GridBagConstraints.FIRST_LINE_START;
 
         this.setLayout(new GridBagLayout());
         
         this.add(startButton, rules);
 
+    
         rules.gridx = 1;
         rules.anchor = GridBagConstraints.NORTHWEST;
         rules.fill = GridBagConstraints.HORIZONTAL;
@@ -62,10 +73,19 @@ public class UiContWindow extends JPanel {
         rules.gridx = 0;
         rules.weighty = 0;
         rules.gridy = 1;
-        //rules.fill = GridBagConstraints.NONE;
+        rules.fill = GridBagConstraints.NONE;
+        //this.add(pathField, rules);
+        this.add(openDialog, rules);
+
+        rules.gridx = 1;
+        rules.weightx = 1;
+        rules.fill = GridBagConstraints.HORIZONTAL;
         this.add(pathField, rules);
 
+        rules.gridx = 0;
         rules.gridy = 2;
+        rules.weightx = 0;
+        rules.fill = GridBagConstraints.NONE;
         this.add(dataUrliste, rules);
 
         rules.gridy = 3;
@@ -94,4 +114,6 @@ public class UiContWindow extends JPanel {
         rules.gridwidth = GridBagConstraints.REMAINDER;
         this.add(dataDiagram, rules);
     }
+
+
 }

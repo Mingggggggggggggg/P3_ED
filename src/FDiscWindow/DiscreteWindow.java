@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class DiscreteWindow extends JFrame {
 
-    UiDiscWindow uiElements = new UiDiscWindow();
+    UiDiscWindow uiElements = UiDiscWindow.getInstance();
 
     public DiscreteWindow(String title) {
         super(title);
