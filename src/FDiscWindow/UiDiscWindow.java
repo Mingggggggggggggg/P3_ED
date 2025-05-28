@@ -28,8 +28,9 @@ public class UiDiscWindow extends JPanel {
     Object[][] data = {
         {}
     };
-
-
+    public void setData(Object[][] data) {
+        this.data = data;
+    }
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
     public String getPathField() {
@@ -57,6 +58,10 @@ public class UiDiscWindow extends JPanel {
     private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
+    public void updateTable() {
+        this.dataTable = new JTable(data, columnNames);
+        this.dataScrollPane.setViewportView(dataTable);
+    }
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
     public void setDataAverage(double dataAverage) {
         this.dataAverage.setText("Arithmetisches Mittel: " + dataAverage);

@@ -57,7 +57,10 @@ public class ActionDiscWindow implements ActionListener{
                     // Setze Merkmalsausprägung für die Tabelle ein
                     String[] charExp = LogicMath.discData.DiscDataReader.getCharExpString(data);
                     instance.setColumnNames(charExp);
-                    //System.out.println(charExp.toString());
+                    //System.out.println(Arrays.toString(charExp));
+                    double[] charExpDouble = LogicMath.discData.DiscDataReader.getCharExp(data);
+                    instance.setData(LogicMath.discData.DiscDataReader.getAbsFreq(charExpDouble, data));
+                    instance.updateTable();
                     
                     break;
                 } catch (IOException e1) {

@@ -75,47 +75,73 @@ public class DiscDataReader {
         return result;
     }
 
+
     public static double[] getCharExp(double[] data) {
         HashSet<Double> characterExpression = new HashSet<Double>();
-        double[] result;
+
         for (int i = 0; i < data.length; i++) {
             characterExpression.add(data[i]);
         }
 
-        String[] puffer = new String[characterExpression.size()];
-        characterExpression.toArray(puffer);
-        result = new double[characterExpression.size()];
+        Double[] puffer = characterExpression.toArray(new Double[0]);
+        System.out.println(characterExpression);
 
-        for (int i = 0; i < characterExpression.size(); i++) {
-            result[i] = Double.parseDouble(puffer[i]);
+        double[] toSort = new double[puffer.length];
+        for (int i = 0; i < toSort.length; i++) {
+            toSort[i] = puffer[i];
         }
 
-        return result;
+        LogicMath.QuickSort.quicksort(toSort);
+        //LogicMath.QuickSort.output(toSort);
+
+        return toSort;
     }
 
     public static String[] getCharExpString(double[] data) {
         HashSet<Double> characterExpression = new HashSet<Double>();
-        int k = 0;
 
         for (int i = 0; i < data.length; i++) {
             characterExpression.add(data[i]);
         }
 
-        String[] result = new String[characterExpression.size()];
+        Double[] puffer = characterExpression.toArray(new Double[0]);
+        //System.out.println(characterExpression);
 
-        Object[] tempArray = characterExpression.toArray();
-
-        for (int j = 0; j < tempArray.length; j++) {
-            result[k] = String.valueOf((Double) tempArray[j]);
-            k++;
+        double[] toSort = new double[puffer.length];
+        for (int i = 0; i < toSort.length; i++) {
+            toSort[i] = puffer[i];
         }
-        // STRING NICHT RICHTIG ALS ARRAY WIEDERGEGEBEN SONDER NUR ARRAY[0]
+
+        LogicMath.QuickSort.quicksort(toSort);
+        //LogicMath.QuickSort.output(toSort);
+
+        String[] result = new String[toSort.length];
+        for (int i = 0; i < toSort.length; i++) {
+            result[i] = String.valueOf((Double) puffer[i]);
+        }
         return result;
+
     }
 
-    public static double[] getAbsFreq(double[] expression, double[] data) {
-        double[] puffer = new double[data.length];
+    public static Object[][] getAbsFreq(double[] expression, double[] data) {
+        Object[][] result = new Object[expression.length][2];
+        double[] toSort = LogicMath.QuickSort.quicksort(data);
+        //LogicMath.QuickSort.output(data);
 
-        return data;
+        for (int i = 0; i < expression.length; i++) {
+            double current = expression[i];
+            int absFreq = 0;
+
+            for (int j = 0; j < toSort.length; j++) {
+                if (toSort[i] == current) {
+                    absFreq++;    
+                }
+            }
+
+        result[i][0] = String.valueOf(current);
+        result[i][1] = absFreq;
+        }
+        //System.out.println(result.toString());
+        return result;
     }
 }
