@@ -20,7 +20,7 @@ public class DataBasicMath {
         double dataAvg = getAverage(data);
 
         for (int i = 0; i < data.length; i++) {
-            result += Math.pow((data[i] + dataAvg), 2);
+            result += Math.pow((data[i] - dataAvg), 2);
         }
         result = result / (data.length - 1);
         result = Math.sqrt(result);

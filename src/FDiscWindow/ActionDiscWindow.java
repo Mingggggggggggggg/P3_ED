@@ -47,10 +47,17 @@ public class ActionDiscWindow implements ActionListener{
                     instance.setRawDataUrliste(Arrays.toString(data));
                     instance.getRawDataUrliste().setVisible(true);
 
+                    // Setze arithmetisches Mittel ein
                     double avg = LogicMath.DataBasicMath.getAverage(data);
                     instance.setDataAverage(avg);
+                    // Setze epmirische Standardabweichung ein
                     double var = LogicMath.DataBasicMath.getVariance(data);
                     instance.setDataVariance(var);
+
+                    // Setze Merkmalsausprägung für die Tabelle ein
+                    String[] charExp = LogicMath.discData.DiscDataReader.getCharExpString(data);
+                    instance.setColumnNames(charExp);
+                    //System.out.println(charExp.toString());
                     
                     break;
                 } catch (IOException e1) {

@@ -19,11 +19,14 @@ public class UiDiscWindow extends JPanel {
     }
     ActionDiscWindow adw = ActionDiscWindow.getInstance();
     String[] columnNames = {
-        "1", "2", "3", "4", "5", "6"
+        
     };
 
+    public void setColumnNames(String[] columnNames) {
+        this.columnNames = columnNames;
+    }
     Object[][] data = {
-        {2, 5, 2, 1, 1, 4, 3, 6, 1, 3}
+        {}
     };
 
 
