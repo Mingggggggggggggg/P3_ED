@@ -57,7 +57,7 @@ public class DiscDataReader {
             System.err.println("Datei konnte nicht gelesen werden.");
             System.err.println(ex);
         } finally {
-            //br.close();
+            br.close();
             in.close();
         }
         return data;
@@ -67,7 +67,5 @@ public class DiscDataReader {
     public String toString() {
         return "DiscDataReader []";
     }
-
-
 
 }
