@@ -43,11 +43,26 @@ public class UiDiscWindow extends JPanel {
         this.dataMerkmal.setText(merkmal);
     }
     private JLabel dataUrliste = new JLabel("Urliste: ");
+    private JTextArea rawDataUrliste = new JTextArea();
+    public JTextArea getRawDataUrliste() {
+        return rawDataUrliste;
+    }
+
+    public void setRawDataUrliste(String data) {
+        this.rawDataUrliste.setText(data);
+    }
     private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
+    public void setDataAverage(double dataAverage) {
+        this.dataAverage.setText("Arithmetisches Mittel: " + dataAverage);
+    }
+
     private JLabel dataVariance = new JLabel("Empirische Standardabweichung: ");
+    public void setDataVariance(double dataVariance) {
+        this.dataVariance .setText("Empirische Standardabweichung: " + dataVariance);;
+    }
     private JPanel dataDiagram = new JPanel();
 
     private GridBagConstraints rules = new GridBagConstraints();
@@ -97,24 +112,33 @@ public class UiDiscWindow extends JPanel {
         this.add(dataUrliste, rules);
 
         rules.gridy = 3;
-        this.add(dataAverage, rules);
+        rawDataUrliste.setVisible(false);
+        rawDataUrliste.setLineWrap(true);
+        rawDataUrliste.setWrapStyleWord(true);
+        rawDataUrliste.setEditable(false);
+        rules.fill = GridBagConstraints.HORIZONTAL;
+        this.add(rawDataUrliste, rules);
 
         rules.gridy = 4;
+        rules.fill = GridBagConstraints.NONE;
+        this.add(dataAverage, rules);
+
+        rules.gridy = 5;
         rules.weighty = 0.1;
         this.add(dataVariance, rules);
 
-        rules.gridy = 6;
+        rules.gridy = 7;
         rules.weighty = 0;
         this.add(tableLabel, rules);
 
-        rules.gridy = 7;
+        rules.gridy = 8;
         rules.weightx = 1;
         rules.fill = GridBagConstraints.NONE;
         dataScrollPane.setPreferredSize(new Dimension(600, 50));
         this.add(dataScrollPane, rules);
         
 
-        rules.gridy = 8;
+        rules.gridy = 9;
         rules.weighty = 1;
         dataDiagram.setBackground(Color.GREEN);
         rules.fill = GridBagConstraints.BOTH;

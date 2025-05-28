@@ -8,11 +8,11 @@ import java.io.IOException;
 public class DiscDataReader {
 
 
-    public static int[] getDiscData(String name) throws IOException {
+    public static double[] getDiscData(String name) throws IOException {
         System.out.println(name);
-        int[] data = new int[100];
+        double[] data = new double[100];
         int dataLength = 0;
-        int[] result;
+        double[] result;
         FileReader in = null;
         BufferedReader br = null;
         String s = "";
@@ -68,7 +68,7 @@ public class DiscDataReader {
 
         // Kopiere data-Array in ein result-array mit der korrekten Länge.
         //System.out.println(dataLength);
-        result = new int[dataLength];
+        result = new double[dataLength];
         System.arraycopy(data, 0, result, 0, dataLength);
         return result;
     }

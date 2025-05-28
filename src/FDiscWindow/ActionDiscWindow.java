@@ -34,12 +34,24 @@ public class ActionDiscWindow implements ActionListener{
         switch (action) {
             case "startDiscMaths":
                 try {
+                    // Überprüfe, ob Datei ausgewählt wurde
                     if (path.isEmpty() || path == null) {
                         System.err.println("Pfad ist leer");
                         return;
                     }
-                    int[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
-                    System.out.println(Arrays.toString(data));
+                    
+                    UiDiscWindow instance = UiDiscWindow.getInstance();
+                    // Setze ausgelesene Daten in JLabel rawDataUrliste ein
+                    double[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
+                    //System.out.println(Arrays.toString(data));
+                    instance.setRawDataUrliste(Arrays.toString(data));
+                    instance.getRawDataUrliste().setVisible(true);
+
+                    double avg = LogicMath.DataBasicMath.getAverage(data);
+                    instance.setDataAverage(avg);
+                    double var = LogicMath.DataBasicMath.getVariance(data);
+                    instance.setDataVariance(var);
+                    
                     break;
                 } catch (IOException e1) {
                     e1.printStackTrace();
