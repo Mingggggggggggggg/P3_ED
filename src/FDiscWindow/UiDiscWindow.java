@@ -29,6 +29,10 @@ public class UiDiscWindow extends JPanel {
 
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
+    public String getPathField() {
+        return pathField.getText();
+    }
+
     public void setPathField(String path) {
         this.pathField.setText(path);
     }

@@ -7,12 +7,14 @@ import java.io.IOException;
 
 public class DiscDataReader {
 
+
     public static int[] getDiscData(String name) throws IOException {
-        int[] data = null;
+        int[] data = new int[100];
 
         FileReader in = null;
         BufferedReader br = null;
         String s = "";
+        String[] select;
 
         try {
             in = new FileReader(name);
@@ -29,14 +31,20 @@ public class DiscDataReader {
             while ((s = br.readLine()) != null) {
                 s = s.trim();
 
-                if (s.equals("name")) {
+                if (s.equals("data")) {
                     s = br.readLine().trim();
-                    if (s != null) {
-                        return s.trim();
+                    if (s == null) {
+                        System.err.println("datafield leer");
+                        break;
                     }
 
-                    while ((s = br.readLine()) != null && !s.equals("endname")) {
-                        return s;
+                    while ((s = br.readLine()) != null && !s.equals("enddata")) {
+                        select = s.split(";");
+
+                        for (int i = 0; i < select.length; i++) {
+                            data[i] = Integer.parseInt(select[i].trim());
+                        }
+                        return data;
                     }
                 }
             }
