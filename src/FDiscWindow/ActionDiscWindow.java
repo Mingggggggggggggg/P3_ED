@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+
 import javax.swing.JFileChooser;
 
 public class ActionDiscWindow implements ActionListener{
@@ -37,7 +39,7 @@ public class ActionDiscWindow implements ActionListener{
                         return;
                     }
                     int[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
-                    System.out.println(data.toString());
+                    System.out.println(Arrays.toString(data));
                     break;
                 } catch (IOException e1) {
                     e1.printStackTrace();

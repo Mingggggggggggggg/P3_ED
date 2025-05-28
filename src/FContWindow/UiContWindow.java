@@ -29,14 +29,21 @@ public class UiContWindow extends JPanel {
 
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
+    public String getPathField() {
+        return pathField.getText();
+    }
+
     public void setPathField(String path) {
         this.pathField.setText(path);
     }
 
     private JButton openDialog = new JButton("Select file");
-    private JLabel dataMerkmal = new JLabel("MERKMAL HIER");
+    private JLabel dataMerkmal = new JLabel("");
+    public void setDataMerkmal(String merkmal) {
+        this.dataMerkmal.setText(merkmal);
+    }
     private JLabel dataUrliste = new JLabel("Urliste: ");
-    private JLabel tableLabel = new JLabel("Klassentabelle:");
+    private JLabel tableLabel = new JLabel("Klassentabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
@@ -53,6 +60,7 @@ public class UiContWindow extends JPanel {
         openDialog.setActionCommand("openFile");
         openDialog.addActionListener(acw);
 
+        dataMerkmal.setFont(P3Style.TITLE_FONT);
 
         rules.gridx = 0;
         rules.gridy = 0;

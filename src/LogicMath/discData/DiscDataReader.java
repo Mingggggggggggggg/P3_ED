@@ -11,7 +11,8 @@ public class DiscDataReader {
     public static int[] getDiscData(String name) throws IOException {
         System.out.println(name);
         int[] data = new int[100];
-
+        int dataLength = 0;
+        int[] result;
         FileReader in = null;
         BufferedReader br = null;
         String s = "";
@@ -26,26 +27,26 @@ public class DiscDataReader {
 
             if (!s.equals("discdata")) {
                 System.err.println("Dateiformat ungueltig");
+                if (s.equals("contdata")) {
+                    System.out.println("Falsche Datei ausgewählt. Meinten Sie discdata.p3?");
+                    System.exit(-1);
+                }
                 System.exit(-1);
-            }
+            } 
 
             while ((s = br.readLine()) != null) {
                 s = s.trim();
 
                 if (s.equals("data")) {
-                    s = br.readLine().trim();
-                    if (s == null) {
-                        System.err.println("datafield leer");
-                        break;
-                    }
 
+                    s = s.trim();
                     while ((s = br.readLine()) != null && !s.equals("enddata")) {
                         select = s.split(";");
 
                         for (int i = 0; i < select.length; i++) {
                             data[i] = Integer.parseInt(select[i].trim());
+                            dataLength++;
                         }
-                        return data;
                     }
                 }
             }
@@ -57,15 +58,18 @@ public class DiscDataReader {
             System.err.println("Datei konnte nicht gelesen werden.");
             System.err.println(ex);
         } finally {
-            br.close();
-            in.close();
+            if (br != null) {
+                br.close();
+            }
+            if (in != null) {
+                in.close();
+            }
         }
-        return data;
-    }
 
-    @Override
-    public String toString() {
-        return "DiscDataReader []";
+        // Kopiere data-Array in ein result-array mit der korrekten Länge.
+        //System.out.println(dataLength);
+        result = new int[dataLength];
+        System.arraycopy(data, 0, result, 0, dataLength);
+        return result;
     }
-
 }
