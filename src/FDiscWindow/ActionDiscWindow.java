@@ -15,6 +15,7 @@ public class ActionDiscWindow implements ActionListener{
         }
         return instance;
     }
+
     private ActionDiscWindow() {
     }
 
@@ -39,6 +40,12 @@ public class ActionDiscWindow implements ActionListener{
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                     System.out.println(file);
                     UiDiscWindow.getInstance().setPathField(file.toString());
+                    try {
+                        UiDiscWindow.getInstance().setDataMerkmal(LogicMath.DataCharacteristics.getDataName(file.toString()));
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
 
                 break;

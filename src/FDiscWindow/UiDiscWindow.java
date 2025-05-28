@@ -34,7 +34,10 @@ public class UiDiscWindow extends JPanel {
     }
 
     private JButton openDialog = new JButton("Select file");
-    private JLabel dataMerkmal = new JLabel("MERKMAL HIER");
+    private JLabel dataMerkmal = new JLabel("");
+    public void setDataMerkmal(String merkmal) {
+        this.dataMerkmal.setText(merkmal);
+    }
     private JLabel dataUrliste = new JLabel("Urliste: ");
     private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
     private JTable dataTable = new JTable(data, columnNames);
@@ -53,6 +56,7 @@ public class UiDiscWindow extends JPanel {
         openDialog.setActionCommand("openFile");
         openDialog.addActionListener(adw);
 
+        dataMerkmal.setFont(P3Style.TITLE_FONT);
 
         rules.gridx = 0;
         rules.gridy = 0;
