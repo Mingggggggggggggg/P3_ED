@@ -9,6 +9,7 @@ public class DiscDataReader {
 
 
     public static int[] getDiscData(String name) throws IOException {
+        System.out.println(name);
         int[] data = new int[100];
 
         FileReader in = null;
@@ -56,10 +57,15 @@ public class DiscDataReader {
             System.err.println("Datei konnte nicht gelesen werden.");
             System.err.println(ex);
         } finally {
-            br.close();
+            //br.close();
             in.close();
         }
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return "DiscDataReader []";
     }
 
 

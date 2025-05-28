@@ -27,25 +27,29 @@ public class ActionDiscWindow implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("."));
-        int response = fileChooser.showOpenDialog(null);
+
 
         switch (action) {
             case "startDiscMaths":
-                System.out.println();
                 try {
-                    System.out.println(LogicMath.DataCharacteristics.getDataName(path));
+                    if (path.isEmpty() || path == null) {
+                        System.err.println("Pfad ist leer");
+                        return;
+                    }
+                    int[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
+                    System.out.println(data.toString());
+                    break;
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
                 break;
             case "openFile":
-
-
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("."));
+                int response = fileChooser.showOpenDialog(null);
                 if (response == JFileChooser.APPROVE_OPTION) {
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                    //setPath(file.toString());
+                    setPath(file.toString());
                     System.out.println(file);
                     UiDiscWindow.getInstance().setPathField(file.toString());
                     try {
