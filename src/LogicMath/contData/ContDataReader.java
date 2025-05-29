@@ -11,13 +11,13 @@ public class ContDataReader {
         try {
             double[] test = getContData("contData.p3");
             for (int i = 0; i < test.length; i++) {
-                System.out.println(test[i]);
+                //System.out.println(test[i]);
             }
 
             String[] test2 = getContClasses("contData.p3");
 
             for (int i = 0; i < test2.length; i++) {
-                double[] range = IntervalTranslator.getInterval(test2[i]);
+                double[] range = IntervalTranslator.getIntervalEncoder(test2[i]);
                 for (int j = 0; j < 2; j++) {
                     System.out.println(range[j]);
                 }
