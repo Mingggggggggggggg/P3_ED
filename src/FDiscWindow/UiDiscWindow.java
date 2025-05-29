@@ -76,6 +76,13 @@ public class UiDiscWindow extends JPanel {
     }
     private JPanel dataDiagram = new JPanel();
 
+    public JPanel getDataDiagram() {
+        return dataDiagram;
+    }
+
+    public void setDataDiagram(JPanel dataDiagram) {
+        this.dataDiagram = dataDiagram;
+    }
     private GridBagConstraints rules = new GridBagConstraints();
 
     private UiDiscWindow() {
