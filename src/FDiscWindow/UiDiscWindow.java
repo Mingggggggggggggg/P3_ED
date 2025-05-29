@@ -18,6 +18,8 @@ public class UiDiscWindow extends JPanel {
         return instance;
     }
     ActionDiscWindow adw = ActionDiscWindow.getInstance();
+
+    // -------------------------------------------- Tabelle --------------------------------------------
     String[] columnNames = {
     };
  
@@ -30,6 +32,8 @@ public class UiDiscWindow extends JPanel {
     public void setData(Object[][] data) {
         this.data = data;
     }
+
+    // --------------------------------------------- /Tabelle ---------------------------------------------
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
     public String getPathField() {

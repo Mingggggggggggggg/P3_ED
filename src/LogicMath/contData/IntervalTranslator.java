@@ -2,9 +2,16 @@
 
 public class IntervalTranslator {
 
+    /** Diese Lösung hatte ich mir viel eleganter vorgestellt.
+     * Ich wollte tief verschachtelte if-Anweisungen vermeiden
+     * und mag persönlich auch gerne switch-cases
+     * 
+     * @param classString
+     * @return
+     */
     public static double[] getIntervalEncoder(String classString) {
         double[] range = new double[4];
-        classString = classString.trim();
+        classString = classString.replace(";", "").trim();
         String[] select;
         byte min = 0;
         byte max = 1;
@@ -26,9 +33,11 @@ public class IntervalTranslator {
             intervalTypeMax = "]";
         }
 
-        if (classString.startsWith("<")) {
+        // Auf contains setzen, anstelle von startsWith. 
+        // startsWith referenziert auf den Originalstring? Oder replace?
+        if (classString.contains("<")) {
             type = "<";
-        } else if (classString.startsWith(">")) {
+        } else if (classString.contains(">")) {
             type = ">";
         } else if (classString.contains("-")) {
             type = "-";
@@ -99,7 +108,7 @@ public class IntervalTranslator {
 
                 break;
             default:
-                System.err.println("Unbekannter Vergleichsoperator");
+                System.err.println("Unbekannter Vergleichsoperator " + classString);
                 break;
         }
         return range;

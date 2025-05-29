@@ -18,15 +18,18 @@ public class UiContWindow extends JPanel {
         return instance;
     }
     ActionContWindow acw = ActionContWindow.getInstance();
-    String[] columnNames = {
-        "1", "2", "3", "4", "5", "6"
+        String[] columnNames = {
     };
-
+ 
+    public void setColumnNames(String[] columnNames) {
+        this.columnNames = columnNames;
+    }
     Object[][] data = {
-        {2, 5, 2, 1, 1, 4, 3, 6, 1, 3}
+        {}
     };
-
-
+    public void setData(Object[][] data) {
+        this.data = data;
+    }
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
     public String getPathField() {
@@ -43,11 +46,30 @@ public class UiContWindow extends JPanel {
         this.dataMerkmal.setText(merkmal);
     }
     private JLabel dataUrliste = new JLabel("Urliste: ");
+    private JTextArea rawDataUrliste = new JTextArea();
+    public JTextArea getRawDataUrliste() {
+        return rawDataUrliste;
+    }
+
+    public void setRawDataUrliste(String data) {
+        this.rawDataUrliste.setText(data);
+    }
     private JLabel tableLabel = new JLabel("Klassentabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
+    public void updateTable() {
+        this.dataTable = new JTable(data, columnNames);
+        this.dataScrollPane.setViewportView(dataTable);
+    }
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
+    public void setDataAverage(double dataAverage) {
+        this.dataAverage.setText("Arithmetisches Mittel: " + dataAverage);
+    }
+
     private JLabel dataVariance = new JLabel("Empirische Standardabweichung: ");
+    public void setDataVariance(double dataVariance) {
+        this.dataVariance .setText("Empirische Standardabweichung: " + dataVariance);;
+    }
     private JPanel dataDiagram = new JPanel();
 
     private GridBagConstraints rules = new GridBagConstraints();
@@ -97,24 +119,33 @@ public class UiContWindow extends JPanel {
         this.add(dataUrliste, rules);
 
         rules.gridy = 3;
-        this.add(dataAverage, rules);
+        rawDataUrliste.setVisible(false);
+        rawDataUrliste.setLineWrap(true);
+        rawDataUrliste.setWrapStyleWord(true);
+        rawDataUrliste.setEditable(false);
+        rules.fill = GridBagConstraints.HORIZONTAL;
+        this.add(rawDataUrliste, rules);
 
         rules.gridy = 4;
-        rules.weighty = 0.1;
+        rules.fill = GridBagConstraints.NONE;
+        this.add(dataAverage, rules);
+
+        rules.gridy = 5;
+        //rules.weighty = 0.1;
         this.add(dataVariance, rules);
 
-        rules.gridy = 6;
+        rules.gridy = 7;
         rules.weighty = 0;
         this.add(tableLabel, rules);
 
-        rules.gridy = 7;
+        rules.gridy = 8;
         rules.weightx = 1;
         rules.fill = GridBagConstraints.NONE;
         dataScrollPane.setPreferredSize(new Dimension(600, 50));
         this.add(dataScrollPane, rules);
         
 
-        rules.gridy = 8;
+        rules.gridy = 9;
         rules.weighty = 1;
         dataDiagram.setBackground(Color.GREEN);
         rules.fill = GridBagConstraints.BOTH;

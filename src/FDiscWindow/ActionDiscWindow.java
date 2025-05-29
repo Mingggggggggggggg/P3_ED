@@ -41,20 +41,21 @@ public class ActionDiscWindow implements ActionListener{
                     }
                     
                     UiDiscWindow instance = UiDiscWindow.getInstance();
+                    
                     // Setze ausgelesene Daten in JLabel rawDataUrliste ein
                     double[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
                     //System.out.println(Arrays.toString(data));
                     instance.setRawDataUrliste(Arrays.toString(data));
                     instance.getRawDataUrliste().setVisible(true);
 
-                    // Setze arithmetisches Mittel ein
+                    // Berechne und setze arithmetisches Mittel ein
                     double avg = LogicMath.DataBasicMath.getAverage(data);
                     instance.setDataAverage(avg);
-                    // Setze epmirische Standardabweichung ein
+                    // Berechne und setze empirische Standardabweichung ein
                     double var = LogicMath.DataBasicMath.getVariance(data);
                     instance.setDataVariance(var);
 
-                    // Setze Merkmalsausprägung für die Tabelle ein
+                    // Extrahiere und setze Merkmalsausprägung für die Tabelle ein
                     String[] charExp = LogicMath.discData.DiscDataReader.getCharExpString(data);
                     instance.setColumnNames(charExp);
                     //System.out.println(Arrays.toString(charExp));

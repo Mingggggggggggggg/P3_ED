@@ -1,5 +1,5 @@
 ﻿package LogicMath;
-// Code entnommen aus den Vorlesungsunterlagen bei Herrn Bachmann in P2
+// Code entnommen aus Vorlesungsunterlagen bei Herrn Bachmann in P2
 public class QuickSort {
 
     public static double[] sort(double[] array, int left, int right) {
