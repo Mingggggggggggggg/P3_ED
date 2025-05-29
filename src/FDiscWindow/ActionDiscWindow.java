@@ -61,6 +61,7 @@ public class ActionDiscWindow implements ActionListener{
                     //System.out.println(Arrays.toString(charExp));
                     double[] charExpDouble = LogicMath.discData.DiscDataReader.getCharExp(data);
                     Object[][] freqTable = LogicMath.discData.DiscDataReader.getAbsFreq(charExpDouble, data);
+                    // Transponiere Matrix, damit diese korrekt in der JTable angezeigt werden
                     Object[][] transFreqTable = new Object[1][freqTable.length];
                     for (int i = 0; i < freqTable.length; i++) {
                         transFreqTable[0][i] = freqTable[i][1];

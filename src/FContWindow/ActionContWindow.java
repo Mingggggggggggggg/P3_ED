@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import javax.swing.JFileChooser;
 
-
-public class ActionContWindow implements ActionListener{
+public class ActionContWindow implements ActionListener {
     private static ActionContWindow instance = null;
     String path = "";
 
@@ -22,6 +21,7 @@ public class ActionContWindow implements ActionListener{
         }
         return instance;
     }
+
     private ActionContWindow() {
     }
 
@@ -44,23 +44,29 @@ public class ActionContWindow implements ActionListener{
                     double[] data = LogicMath.contData.ContDataReader.getContData(path);
                     instance.setRawDataUrliste(Arrays.toString(data));
                     instance.getRawDataUrliste().setVisible(true);
-                    //System.out.println(Arrays.toString(data));
+                    // System.out.println(Arrays.toString(data));
 
                     // Berechne und setze arithmetisches Mittel ein
                     double avg = LogicMath.DataBasicMath.getAverage(data);
                     instance.setDataAverage(avg);
 
-                    // Berechne und setze empirische Standardabweichung ein                    
+                    // Berechne und setze empirische Standardabweichung ein
                     double var = LogicMath.DataBasicMath.getVariance(data);
                     instance.setDataVariance(var);
 
-                    // Ermittle Klasseneinteilung aus Datei und gebe dieses als Klassennamen in die Tabelle ein
+                    // Ermittle Klasseneinteilung aus Datei und gebe dieses als Klassennamen in die
+                    // Tabelle ein
                     String[] classInterval = LogicMath.contData.ContDataReader.getContClasses(path);
                     instance.setColumnNames(classInterval);
                     Object[][] freqTable = LogicMath.contData.ContDataReader.dataClassification(data, path);
-                    instance.setData(freqTable);
+                    // Transponiere Matrix, damit diese korrekt in der JTable angezeigt werden
+                    Object[][] transFreqTable = new Object[1][freqTable.length];
+                    for (int i = 0; i < freqTable.length; i++) {
+                        transFreqTable[0][i] = freqTable[i][0];
+                        //System.out.println(transFreqTable[0][i]);
+                    }
+                    instance.setData(transFreqTable);
                     instance.updateTable();
-
 
                     break;
                 } catch (IOException e1) {
@@ -77,7 +83,8 @@ public class ActionContWindow implements ActionListener{
                     System.out.println(file);
                     UiContWindow.getInstance().setPathField(file.toString());
                     try {
-                        UiContWindow.getInstance().setDataMerkmal(LogicMath.DataCharacteristics.getDataName(file.toString()));
+                        UiContWindow.getInstance()
+                                .setDataMerkmal(LogicMath.DataCharacteristics.getDataName(file.toString()));
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
