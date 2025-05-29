@@ -6,19 +6,28 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class DataCharacteristics {
-        public static String getDataName(String name) throws IOException {
+
+    /**
+     * Diese Methode ermittelt die Merkmal eines diskreten und
+     * stetigen/quasi-stetigen Datensatzes
+     * 
+     * @param filePath Pfad zur Datei
+     * @return Gibt den Namen des Merkmals aus der Datei zurück
+     * @throws IOException
+     */
+    public static String getDataName(String filePath) throws IOException {
         FileReader in = null;
         BufferedReader br = null;
         String s = "";
 
         try {
-            in = new FileReader(name);
+            in = new FileReader(filePath);
             br = new BufferedReader(in);
-            
-            s = br.readLine().trim();
-            //System.out.println(s);
 
-            if (!s.equals("discdata") && !s.equals("contdata") ) {
+            s = br.readLine().trim();
+            // System.out.println(s);
+
+            if (!s.equals("discdata") && !s.equals("contdata")) {
                 return "Dateiformat ungueltig";
             }
 

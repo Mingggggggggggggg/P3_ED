@@ -4,16 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class ContDataReader {
 
-    /** Diese Methode extrahiert stetige bzw. quasi-stetige Daten aus einer Datei 
+    /**
+     * Diese Methode extrahiert stetige bzw. quasi-stetige Daten aus einer Datei
      * und gibt diese als doublearray zurück.
      * 
      * @param filePath Pfad zur Datei
-     * @return doublearray der ausgelesenen Daten
-     * @throws IOException 
+     * @return Gibt Daten als Double Array zurück
+     * @throws IOException
      */
     public static double[] getContData(String filePath) throws IOException {
         // System.out.println(filePath);
@@ -79,12 +79,14 @@ public class ContDataReader {
         System.arraycopy(data, 0, result, 0, dataLength);
         return result;
     }
-    /** Diese Methode extrahiert die Klassenintervalle aus der Datei und gibt diese
+
+    /**
+     * Diese Methode extrahiert die Klassenintervalle aus der Datei und gibt diese
      * als String Array zurück.
      * Zum nahtlosen Einfügen in columnNames einer JTable
      * 
      * @param filePath Pfad zur Datei
-     * @return Klassenintervalle aus der Datei
+     * @return Klassenintervalle aus der Datei als String Array
      * @throws IOException
      */
     public static String[] getContClasses(String filePath) throws IOException {
@@ -154,12 +156,16 @@ public class ContDataReader {
         return result;
     }
 
-    /** Diese Methode verarbeitet die String Klassenintervalle und zählt anhand der ausgelesenen Daten
-     * die Häufigkeiten, wie oft diese in die entsprechhenden Klassenintervalle fallen.
+    /**
+     * Diese Methode verarbeitet die String Klassenintervalle und zählt anhand der
+     * ausgelesenen Daten
+     * die Häufigkeiten, wie oft diese in die entsprechhenden Klassenintervalle
+     * fallen.
      * 
-     * @param data Array der ausgelesenen Daten
+     * @param data     Array aus {@link #getContData(String)}
      * @param filePath Pfad zur Datei
-     * @return Zweidimensionales Objekt 
+     * @return Zweidimensionales Objekt mit Klassenintervall und dazugehörige
+     *         Häufigkeiten
      * @throws IOException
      */
     public static Object[][] dataClassification(double[] data, String filePath) throws IOException {
@@ -196,16 +202,20 @@ public class ContDataReader {
 
             result[i][0] = count;
             result[i][1] = classesString[i];
-            //System.out.println(Arrays.toString(result[i]));
+            // System.out.println(Arrays.toString(result[i]));
         }
         return result;
     }
 
-    /** Diese Methode prüft, ob die Grenzen, die in der Datei gegeben werden, lückenlos sind.
-     * Nicht lückenlose Klassen sollen eine Fehlermeldung geben und das Programm schließen.
-     * @param classesString
+    /**
+     * Diese Methode prüft, ob die Grenzen, die in der Datei gegeben werden,
+     * lückenlos sind.
+     * Nicht lückenlose Klassen sollen eine Fehlermeldung geben und das Programm
+     * schließen.
+     * 
+     * @param classesString String aus {@link #getContClasses(String)}
      */
-    public static void continuityCheck(String[] classesString ) {
+    public static void continuityCheck(String[] classesString) {
         for (int i = 0; i < classesString.length; i++) {
             System.out.println(classesString[i]);
         }
