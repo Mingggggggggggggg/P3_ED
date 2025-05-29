@@ -156,7 +156,7 @@ public class ContDataReader {
         // System.out.println(dataLength);
         result = new String[dataLength];
         System.arraycopy(data, 0, result, 0, dataLength);
-        continuityCheck(result);
+
         return result;
     }
 
@@ -223,9 +223,22 @@ public class ContDataReader {
      * 
      * @author Minh
      */
-    public static void continuityCheck(String[] classesString) {
-        for (int i = 0; i < classesString.length; i++) {
-            System.out.println(classesString[i]);
+    public static void continuityCheck(double[] encodedClasses) {
+        boolean hasNegativeInfinity;
+        boolean hasPositiveInfinity;
+        for (int i = 0; i < encodedClasses.length; i++) {
+            
         }
     }
+/*
+    public static void main(String[] args) throws IOException {
+        String filePath = "contData.p3";
+        double[] data = getContData(filePath);
+        Object[][] test = dataClassification(data, filePath);
+
+        for (int i = 0; i < test.length; i++) {
+            System.out.println(test[i][1].toString());
+        }
+    }
+ */
 }

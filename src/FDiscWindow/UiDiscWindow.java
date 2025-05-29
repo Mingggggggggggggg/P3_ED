@@ -72,7 +72,7 @@ public class UiDiscWindow extends JPanel {
 
     private JLabel dataVariance = new JLabel("Empirische Standardabweichung: ");
     public void setDataVariance(double dataVariance) {
-        this.dataVariance .setText("Empirische Standardabweichung: " + dataVariance);;
+        this.dataVariance .setText("Empirische Standardabweichung: " + dataVariance);
     }
     private JPanel dataDiagram = new JPanel();
 

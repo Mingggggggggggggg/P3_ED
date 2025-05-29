@@ -119,6 +119,7 @@ public class IntervalTranslator {
                 System.err.println("Unbekannter Vergleichsoperator " + classString);
                 break;
         }
+        //LogicMath.contData.ContDataReader.continuityCheck(range);
         return range;
     }
 }
