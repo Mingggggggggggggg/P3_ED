@@ -83,7 +83,7 @@ public class ActionDiscWindow implements ActionListener{
                 if (response == JFileChooser.APPROVE_OPTION) {
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                     setPath(file.toString());
-                    System.out.println(file);
+                    //System.out.println(file);
                     UiDiscWindow.getInstance().setPathField(file.toString());
                     try {
                         UiDiscWindow.getInstance().setDataMerkmal(LogicMath.DataCharacteristics.getDataName(file.toString()));

@@ -8,6 +8,13 @@ import java.util.Arrays;
 
 public class ContDataReader {
 
+    /** Diese Methode extrahiert stetige bzw. quasi-stetige Daten aus einer Datei 
+     * und gibt diese als doublearray zurück.
+     * 
+     * @param filePath Pfad zur Datei
+     * @return doublearray der ausgelesenen Daten
+     * @throws IOException 
+     */
     public static double[] getContData(String filePath) throws IOException {
         // System.out.println(filePath);
         double[] data = new double[100];
@@ -72,7 +79,14 @@ public class ContDataReader {
         System.arraycopy(data, 0, result, 0, dataLength);
         return result;
     }
-
+    /** Diese Methode extrahiert die Klassenintervalle aus der Datei und gibt diese
+     * als String Array zurück.
+     * Zum nahtlosen Einfügen in columnNames einer JTable
+     * 
+     * @param filePath Pfad zur Datei
+     * @return Klassenintervalle aus der Datei
+     * @throws IOException
+     */
     public static String[] getContClasses(String filePath) throws IOException {
         // System.out.println(filePath);
         String[] data = new String[100];
@@ -136,10 +150,18 @@ public class ContDataReader {
         // System.out.println(dataLength);
         result = new String[dataLength];
         System.arraycopy(data, 0, result, 0, dataLength);
-
+        continuityCheck(result);
         return result;
     }
 
+    /** Diese Methode verarbeitet die String Klassenintervalle und zählt anhand der ausgelesenen Daten
+     * die Häufigkeiten, wie oft diese in die entsprechhenden Klassenintervalle fallen.
+     * 
+     * @param data Array der ausgelesenen Daten
+     * @param filePath Pfad zur Datei
+     * @return Zweidimensionales Objekt 
+     * @throws IOException
+     */
     public static Object[][] dataClassification(double[] data, String filePath) throws IOException {
         String[] classesString = getContClasses(filePath);
         Object[][] result = new Object[classesString.length][2];
@@ -174,47 +196,18 @@ public class ContDataReader {
 
             result[i][0] = count;
             result[i][1] = classesString[i];
-            System.out.println(Arrays.toString(result[i]));
+            //System.out.println(Arrays.toString(result[i]));
         }
-
         return result;
     }
 
-    /*
-     * public static Object[][] dataClassification(double[] data, double[] interval)
-     * {
-     * Object[][] result = new Object[interval.length][];
-     * int count = 0;
-     * 
-     * if (interval[2] == 0) {
-     * for (int i = 0; i < data.length; i++) {
-     * if (data[i] > interval[0]) {
-     * count++;
-     * }
-     * }
-     * } else if (interval[2] == 1) {
-     * for (int i = 0; i < data.length; i++) {
-     * if (data[i] >= interval[0]) {
-     * count++;
-     * }
-     * }
-     * }
-     * 
-     * if (interval[3] == 0) {
-     * for (int i = 0; i < data.length; i++) {
-     * if (data[i] < interval[1]) {
-     * count--;
-     * }
-     * }
-     * } else if (interval[3] == 1) {
-     * for (int i = 0; i < data.length; i++) {
-     * if (data[i] <= interval[1]) {
-     * count--;
-     * }
-     * }
-     * }
-     * 
-     * return result;
-     * }
+    /** Diese Methode prüft, ob die Grenzen, die in der Datei gegeben werden, lückenlos sind.
+     * Nicht lückenlose Klassen sollen eine Fehlermeldung geben und das Programm schließen.
+     * @param classesString
      */
+    public static void continuityCheck(String[] classesString ) {
+        for (int i = 0; i < classesString.length; i++) {
+            System.out.println(classesString[i]);
+        }
+    }
 }

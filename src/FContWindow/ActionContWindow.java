@@ -80,7 +80,7 @@ public class ActionContWindow implements ActionListener {
                 if (response == JFileChooser.APPROVE_OPTION) {
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                     setPath(file.toString());
-                    System.out.println(file);
+                    //System.out.println(file);
                     UiContWindow.getInstance().setPathField(file.toString());
                     try {
                         UiContWindow.getInstance()
