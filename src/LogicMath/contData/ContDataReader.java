@@ -9,11 +9,13 @@ public class ContDataReader {
 
     /**
      * Diese Methode extrahiert stetige bzw. quasi-stetige Daten aus einer Datei
-     * und gibt diese als doublearray zurück.
+     * und gibt diese als Double Array zurück.
      * 
      * @param filePath Pfad zur Datei
      * @return Gibt Daten als Double Array zurück
      * @throws IOException
+     * 
+     * @author Minh
      */
     public static double[] getContData(String filePath) throws IOException {
         // System.out.println(filePath);
@@ -88,6 +90,8 @@ public class ContDataReader {
      * @param filePath Pfad zur Datei
      * @return Klassenintervalle aus der Datei als String Array
      * @throws IOException
+     * 
+     * @author Minh
      */
     public static String[] getContClasses(String filePath) throws IOException {
         // System.out.println(filePath);
@@ -167,6 +171,8 @@ public class ContDataReader {
      * @return Zweidimensionales Objekt mit Klassenintervall und dazugehörige
      *         Häufigkeiten
      * @throws IOException
+     * 
+     * @author Minh
      */
     public static Object[][] dataClassification(double[] data, String filePath) throws IOException {
         String[] classesString = getContClasses(filePath);
@@ -214,6 +220,8 @@ public class ContDataReader {
      * schließen.
      * 
      * @param classesString String aus {@link #getContClasses(String)}
+     * 
+     * @author Minh
      */
     public static void continuityCheck(String[] classesString) {
         for (int i = 0; i < classesString.length; i++) {

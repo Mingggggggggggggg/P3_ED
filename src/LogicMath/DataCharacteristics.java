@@ -14,6 +14,8 @@ public class DataCharacteristics {
      * @param filePath Pfad zur Datei
      * @return Gibt den Namen des Merkmals aus der Datei zurück
      * @throws IOException
+     * 
+     * @author Minh
      */
     public static String getDataName(String filePath) throws IOException {
         FileReader in = null;

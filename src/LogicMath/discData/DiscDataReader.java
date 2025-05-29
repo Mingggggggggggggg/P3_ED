@@ -15,9 +15,11 @@ public class DiscDataReader {
      * @param filePath Pfad zur Datei
      * @return
      * @throws IOException
+     * 
+     * @author Minh
      */
     public static double[] getDiscData(String filePath) throws IOException {
-        System.out.println(filePath);
+        //System.out.println(filePath);
         double[] data = new double[100];
         int dataLength = 0;
         double[] result;
@@ -36,7 +38,7 @@ public class DiscDataReader {
             if (!s.equals("discdata")) {
                 System.err.println("Dateiformat ungueltig");
                 if (s.equals("contdata")) {
-                    System.out.println("Falsche Datei ausgewählt. Meinten Sie discdata.p3?");
+                    System.err.println("Falsche Datei ausgewählt. Meinten Sie discdata.p3?");
                     System.exit(-1);
                 }
                 System.exit(-1);
@@ -88,6 +90,8 @@ public class DiscDataReader {
      * 
      * @param data Daten ausgelesen aus {@link #getDiscData(String)}
      * @return Gibt Merkmalsausprägung als Double Array zurück
+     * 
+     * @author Minh
      */
     public static double[] getCharExp(double[] data) {
         HashSet<Double> characterExpression = new HashSet<Double>();
@@ -97,7 +101,7 @@ public class DiscDataReader {
         }
 
         Double[] puffer = characterExpression.toArray(new Double[0]);
-        System.out.println(characterExpression);
+        //System.out.println(characterExpression);
 
         double[] toSort = new double[puffer.length];
         for (int i = 0; i < toSort.length; i++) {

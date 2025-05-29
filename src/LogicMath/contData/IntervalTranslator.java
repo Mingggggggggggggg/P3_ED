@@ -2,12 +2,16 @@
 
 public class IntervalTranslator {
 
-    /** Diese Lösung hatte ich mir viel eleganter vorgestellt.
+    /**
+     * Diese Lösung hatte ich mir viel eleganter vorgestellt.
      * Ich wollte tief verschachtelte if-Anweisungen vermeiden
      * und mag persönlich auch gerne switch-cases
      * 
-     * @param classString
-     * @return
+     * @param classString Ein Klassenintervall-String aus
+     *                    {@link #getContClasses(String)}
+     * @return Gibt Klassenintervall als double Array der Länge 4 zurück
+     * 
+     * @author Minh
      */
     public static double[] getIntervalEncoder(String classString) {
         double[] range = new double[4];
@@ -33,7 +37,7 @@ public class IntervalTranslator {
             intervalTypeMax = "]";
         }
 
-        // Auf contains setzen, anstelle von startsWith. 
+        // Auf contains setzen, anstelle von startsWith.
         // startsWith referenziert auf den Originalstring? Oder replace?
         if (classString.contains("<")) {
             type = "<";
@@ -43,6 +47,9 @@ public class IntervalTranslator {
             type = "-";
         }
 
+        // Kodiere offene (0) bzw. geschlossene (1) Intervalle in die Indizes
+        // range[2] für die untere Grenze und
+        // range[3] für die obere Grenze
         switch (intervalTypeMin) {
             case "(":
                 classString = classString.replace("(", "").trim();
@@ -79,8 +86,9 @@ public class IntervalTranslator {
                 break;
         }
 
-        //Anhand des Vergleichsoperator werden der niedrigstmögliche Wert im Intervall auf range[0] 
-        //und der höchstmögliche Wert im Intervall auf range[1] gespeichert
+        // Anhand des Vergleichsoperator werden der niedrigstmögliche Wert im Intervall
+        // auf range[0]
+        // und der höchstmögliche Wert im Intervall auf range[1] gespeichert
         switch (type) {
             case "<":
                 classString = classString.replace("<", "").trim();
