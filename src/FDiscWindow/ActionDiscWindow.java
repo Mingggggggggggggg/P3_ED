@@ -59,9 +59,16 @@ public class ActionDiscWindow implements ActionListener{
                     instance.setColumnNames(charExp);
                     //System.out.println(Arrays.toString(charExp));
                     double[] charExpDouble = LogicMath.discData.DiscDataReader.getCharExp(data);
-                    instance.setData(LogicMath.discData.DiscDataReader.getAbsFreq(charExpDouble, data));
+                    Object[][] freqTable = LogicMath.discData.DiscDataReader.getAbsFreq(charExpDouble, data);
+                    Object[][] transFreqTable = new Object[1][freqTable.length];
+                    for (int i = 0; i < freqTable.length; i++) {
+                        transFreqTable[0][i] = freqTable[i][1];
+                    }
+                    instance.setData(transFreqTable);
                     instance.updateTable();
                     
+
+
                     break;
                 } catch (IOException e1) {
                     e1.printStackTrace();

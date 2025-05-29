@@ -4,14 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Array;
 import java.util.HashSet;
-import java.util.Set;
 
 public class DiscDataReader {
 
-    public static double[] getDiscData(String name) throws IOException {
-        System.out.println(name);
+    public static double[] getDiscData(String filePath) throws IOException {
+        System.out.println(filePath);
         double[] data = new double[100];
         int dataLength = 0;
         double[] result;
@@ -21,7 +19,7 @@ public class DiscDataReader {
         String[] select;
 
         try {
-            in = new FileReader(name);
+            in = new FileReader(filePath);
             br = new BufferedReader(in);
 
             s = br.readLine().trim();
@@ -117,7 +115,7 @@ public class DiscDataReader {
 
         String[] result = new String[toSort.length];
         for (int i = 0; i < toSort.length; i++) {
-            result[i] = String.valueOf((Double) puffer[i]);
+            result[i] = String.valueOf((Double) toSort[i]);
         }
         return result;
 
@@ -133,7 +131,7 @@ public class DiscDataReader {
             int absFreq = 0;
 
             for (int j = 0; j < toSort.length; j++) {
-                if (toSort[i] == current) {
+                if (toSort[j] == current) {
                     absFreq++;    
                 }
             }

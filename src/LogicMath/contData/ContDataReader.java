@@ -7,9 +7,33 @@ import java.io.IOException;
 
 public class ContDataReader {
 
+    public static void main(String[] args) {
+        try {
+            double[] test = getContData("contData.p3");
+            for (int i = 0; i < test.length; i++) {
+                System.out.println(test[i]);
+            }
 
-    public static double[] getContData(String name) throws IOException {
-        System.out.println(name);
+            String[] test2 = getContClasses("contData.p3");
+
+            for (int i = 0; i < test2.length; i++) {
+                double[] range = IntervalTranslator.getInterval(test2[i]);
+                for (int j = 0; j < 2; j++) {
+                    System.out.println(range[j]);
+                }
+                //System.out.println(test2[i]);
+            }
+
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+
+    public static double[] getContData(String filePath) throws IOException {
+        //System.out.println(filePath);
         double[] data = new double[100];
         int dataLength = 0;
         double[] result;
@@ -19,7 +43,7 @@ public class ContDataReader {
         String[] select;
 
         try {
-            in = new FileReader(name);
+            in = new FileReader(filePath);
             br = new BufferedReader(in);
             
             s = br.readLine().trim();
@@ -73,18 +97,18 @@ public class ContDataReader {
         return result;
     }
 
-public static double[] getContClasses(String name) throws IOException {
-        System.out.println(name);
-        double[] data = new double[100];
+public static String[] getContClasses(String filePath) throws IOException {
+        //System.out.println(filePath);
+        String[] data = new String[100];
         int dataLength = 0;
-        double[] result;
+        String[] result;
         FileReader in = null;
         BufferedReader br = null;
         String s = "";
         String[] select;
 
         try {
-            in = new FileReader(name);
+            in = new FileReader(filePath);
             br = new BufferedReader(in);
             
             s = br.readLine().trim();
@@ -109,9 +133,10 @@ public static double[] getContClasses(String name) throws IOException {
                         select = s.split(";");
 
                         for (int i = 0; i < select.length; i++) {
-                            data[i] = Double.parseDouble(select[i].trim());
-                            dataLength++;
+                            data[dataLength] = select[i].trim();
+
                         }
+                    dataLength++;
                     }
                 }
             }
@@ -133,7 +158,7 @@ public static double[] getContClasses(String name) throws IOException {
 
         // Kopiere data-Array in ein result-array mit der korrekten Länge.
         //System.out.println(dataLength);
-        result = new double[dataLength];
+        result = new String[dataLength];
         System.arraycopy(data, 0, result, 0, dataLength);
         return result;
     }

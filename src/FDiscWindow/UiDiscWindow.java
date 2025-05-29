@@ -19,9 +19,8 @@ public class UiDiscWindow extends JPanel {
     }
     ActionDiscWindow adw = ActionDiscWindow.getInstance();
     String[] columnNames = {
-        
     };
-
+ 
     public void setColumnNames(String[] columnNames) {
         this.columnNames = columnNames;
     }
@@ -132,7 +131,7 @@ public class UiDiscWindow extends JPanel {
         this.add(dataAverage, rules);
 
         rules.gridy = 5;
-        rules.weighty = 0.1;
+        //rules.weighty = 0.1;
         this.add(dataVariance, rules);
 
         rules.gridy = 7;
