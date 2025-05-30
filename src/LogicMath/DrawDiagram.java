@@ -10,11 +10,23 @@ public class DrawDiagram extends JPanel{
     private Bar[] bars;
     private int width;
     private int height;
-    private Bar b1;
 
-    
-    public void paintComponent(Graphics g) {
+    public DrawDiagram(Bar[] bars, int width, int height) {
+        this.bars = bars;
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        P3WindowToViewport converter = new P3WindowToViewport(null, width, height, width, height);
+        double[] origin = {0, 0};
+
+        P3WindowToViewport converter = new P3WindowToViewport(origin, width, height, width, height);
+
+        for(int i = 0; i < bars.length; i++) {
+
+        }
+
     }
 }

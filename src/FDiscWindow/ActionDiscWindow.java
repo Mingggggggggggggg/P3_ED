@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 
-public class ActionDiscWindow implements ActionListener{
+public class ActionDiscWindow implements ActionListener {
     private static ActionDiscWindow instance = null;
     String path = "";
 
@@ -30,7 +30,6 @@ public class ActionDiscWindow implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
 
-
         switch (action) {
             case "startDiscMaths":
                 try {
@@ -39,12 +38,12 @@ public class ActionDiscWindow implements ActionListener{
                         System.err.println("Pfad ist leer");
                         return;
                     }
-                    
+
                     UiDiscWindow instance = UiDiscWindow.getInstance();
-                    
+
                     // Setze ausgelesene Daten in JLabel rawDataUrliste ein
                     double[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
-                    //System.out.println(Arrays.toString(data));
+                    // System.out.println(Arrays.toString(data));
                     instance.setRawDataUrliste(Arrays.toString(data));
                     instance.getRawDataUrliste().setVisible(true);
 
@@ -58,7 +57,7 @@ public class ActionDiscWindow implements ActionListener{
                     // Extrahiere und setze Merkmalsausprägung für die Tabelle ein
                     String[] charExp = LogicMath.discData.DiscDataReader.getCharExpString(data);
                     instance.setColumnNames(charExp);
-                    //System.out.println(Arrays.toString(charExp));
+                    // System.out.println(Arrays.toString(charExp));
                     double[] charExpDouble = LogicMath.discData.DiscDataReader.getCharExp(data);
                     Object[][] freqTable = LogicMath.discData.DiscDataReader.getAbsFreq(charExpDouble, data);
                     // Transponiere Matrix, damit diese korrekt in der JTable angezeigt werden
@@ -68,8 +67,13 @@ public class ActionDiscWindow implements ActionListener{
                     }
                     instance.setData(transFreqTable);
                     instance.updateTable();
-                    
 
+                    
+                    double[][] absFreqDouble = LogicMath.discData.DiscDataReader.getAbsFreqDouble(charExpDouble, data);
+                    int panelHeight = instance.getDataDiagram().getHeight();
+                    int panelWidth = instance.getDataDiagram().getWidth();
+                    double[][] barDimensions = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
+                    
 
                     break;
                 } catch (IOException e1) {
@@ -83,10 +87,11 @@ public class ActionDiscWindow implements ActionListener{
                 if (response == JFileChooser.APPROVE_OPTION) {
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                     setPath(file.toString());
-                    //System.out.println(file);
+                    // System.out.println(file);
                     UiDiscWindow.getInstance().setPathField(file.toString());
                     try {
-                        UiDiscWindow.getInstance().setDataMerkmal(LogicMath.DataCharacteristics.getDataName(file.toString()));
+                        UiDiscWindow.getInstance()
+                                .setDataMerkmal(LogicMath.DataCharacteristics.getDataName(file.toString()));
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();

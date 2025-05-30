@@ -206,8 +206,8 @@ public class ContDataReader {
                 count++;
             }
 
-            result[i][0] = count;
-            result[i][1] = classesString[i];
+            result[i][0] = count;   // Häufigkeit im Intervall
+            result[i][1] = classesString[i];    // Klassenintervall
             // System.out.println(Arrays.toString(result[i]));
         }
         return result;

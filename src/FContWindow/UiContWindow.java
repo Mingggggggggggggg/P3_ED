@@ -121,7 +121,6 @@ public class UiContWindow extends JPanel {
         rules.gridy = 3;
         rawDataUrliste.setVisible(false);
         rawDataUrliste.setLineWrap(true);
-        rawDataUrliste.setWrapStyleWord(true);
         rawDataUrliste.setEditable(false);
         rules.fill = GridBagConstraints.HORIZONTAL;
         this.add(rawDataUrliste, rules);

@@ -13,13 +13,13 @@ public class DiscDataReader {
      * Array zurück
      * 
      * @param filePath Pfad zur Datei
-     * @return
+     * @return Double Array mit den ausgelesenen Daten
      * @throws IOException
      * 
      * @author Minh
      */
     public static double[] getDiscData(String filePath) throws IOException {
-        //System.out.println(filePath);
+        // System.out.println(filePath);
         double[] data = new double[100];
         int dataLength = 0;
         double[] result;
@@ -101,7 +101,7 @@ public class DiscDataReader {
         }
 
         Double[] puffer = characterExpression.toArray(new Double[0]);
-        //System.out.println(characterExpression);
+        // System.out.println(characterExpression);
 
         double[] toSort = new double[puffer.length];
         for (int i = 0; i < toSort.length; i++) {
@@ -120,6 +120,8 @@ public class DiscDataReader {
      * 
      * @param data Daten ausgelesen aus {@link #getDiscData(String)}
      * @return Gibt Merkmalsausprägung als String Array zurück
+     * 
+     * @author Minh
      */
     public static String[] getCharExpString(double[] data) {
         HashSet<Double> characterExpression = new HashSet<Double>();
@@ -153,6 +155,8 @@ public class DiscDataReader {
      * @param data       Daten ausgelesen aus {@link #getDiscData(String)}
      * @return Gibt Merkmalsausprägung und Häufigkeit als zweidimensionales Objekt
      *         zurück
+     * 
+     * @author Minh
      */
     public static Object[][] getAbsFreq(double[] expression, double[] data) {
         Object[][] result = new Object[expression.length][2];
@@ -169,8 +173,42 @@ public class DiscDataReader {
                 }
             }
 
-            result[i][0] = String.valueOf(current);
-            result[i][1] = absFreq;
+            result[i][0] = current; // Merkmalsausprägung
+            result[i][1] = absFreq; // Absolute Häufigkeit
+        }
+        // System.out.println(result.toString());
+        return result;
+    }
+
+    /**
+     * Methode explizit für
+     * {@link #barDimensions(double[][] discDimensions, int vpWidth, int vpHeight)}
+     * geschrieben, da es zu Problemen kam Object[][] zu double[] zu parsen
+     * 
+     * @param expression Merkmalsausprägung aus {@link #getCharExp(double[])}
+     * @param data       Daten ausgelesen aus {@link #getDiscData(String)}
+     * @return Gibt Merkmalsausprägung und Häufigkeit als zweidimensionales Objekt
+     *         zurück
+     * 
+     * @Author Minh
+     */
+    public static double[][] getAbsFreqDouble(double[] expression, double[] data) {
+        double[][] result = new double[expression.length][2];
+        double[] toSort = LogicMath.QuickSort.quicksort(data);
+        // LogicMath.QuickSort.output(data);
+
+        for (int i = 0; i < expression.length; i++) {
+            double current = expression[i];
+            int absFreq = 0;
+
+            for (int j = 0; j < toSort.length; j++) {
+                if (toSort[j] == current) {
+                    absFreq++;
+                }
+            }
+
+            result[i][0] = current; // Merkmalsausprägung
+            result[i][1] = absFreq; // Absolute Häufigkeit
         }
         // System.out.println(result.toString());
         return result;

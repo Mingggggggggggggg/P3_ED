@@ -32,8 +32,9 @@ public class UiDiscWindow extends JPanel {
     public void setData(Object[][] data) {
         this.data = data;
     }
-
     // --------------------------------------------- /Tabelle ---------------------------------------------
+
+
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
     public String getPathField() {
@@ -132,7 +133,6 @@ public class UiDiscWindow extends JPanel {
         rules.gridy = 3;
         rawDataUrliste.setVisible(false);
         rawDataUrliste.setLineWrap(true);
-        rawDataUrliste.setWrapStyleWord(true);
         rawDataUrliste.setEditable(false);
         rules.fill = GridBagConstraints.HORIZONTAL;
         this.add(rawDataUrliste, rules);
