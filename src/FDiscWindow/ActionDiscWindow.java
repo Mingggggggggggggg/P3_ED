@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+
+import LogicMath.DrawDiagram;
+import LogicMath.discData.Bar;
 
 public class ActionDiscWindow implements ActionListener {
     private static ActionDiscWindow instance = null;
@@ -68,12 +72,12 @@ public class ActionDiscWindow implements ActionListener {
                     instance.setData(transFreqTable);
                     instance.updateTable();
 
-                    
                     double[][] absFreqDouble = LogicMath.discData.DiscDataReader.getAbsFreqDouble(charExpDouble, data);
                     int panelHeight = instance.getDataDiagram().getHeight();
                     int panelWidth = instance.getDataDiagram().getWidth();
-                    double[][] barDimensions = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
-                    
+                    Bar[] bars = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
+
+                    // TODO DIAGRAMME ZEICHENN
 
                     break;
                 } catch (IOException e1) {

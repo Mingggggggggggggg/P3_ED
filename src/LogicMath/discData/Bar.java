@@ -12,8 +12,6 @@ public class Bar {
     private double width;
     private double height;
     private Color color;
-    private double highestVal;
-    private double amountBar;
 
     public Bar(double x, double y, double width, double height, Color color) {
         this.x = x;
@@ -25,7 +23,8 @@ public class Bar {
 
     public void drawBar(Graphics2D g) {
         g.setColor(color);
-        g.fill(new Rectangle2D.Double(x, y, width, height));
+        Rectangle2D.Double bar = new Rectangle2D.Double(x, y, width, height);
+        g.fill(bar);
     }
 
     // Notiz: Brauche Anzahl der benötigten Balken double[0], ergebend aus Länge der
@@ -33,10 +32,10 @@ public class Bar {
     // Benötige höchstwert der Merkmalsausprägung oder alle abs. Häuf. in double[1],
     // um Dimensionen in y bestimmen zu können
 
-    public static double[][] barDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
+    public static Bar[] barDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
         int amountCharExp = discDimensions.length;
-        
-        double[][] result = new double[amountCharExp][3];
+
+        Bar[] bars = new Bar[amountCharExp];
         double[] absFreq = new double[amountCharExp];
 
         double maxHeight;
@@ -53,7 +52,7 @@ public class Bar {
         // Extrahiere absolute Häufigkeiten und ermittle den maxWert
         for (int i = 0; i < amountCharExp; i++) {
             absFreq[i] = discDimensions[i][1];
-            //System.out.println(absFreq[i]);
+            // System.out.println(absFreq[i]);
         }
 
         maxHeight = Arrays.stream(absFreq).max().getAsDouble();
@@ -67,17 +66,11 @@ public class Bar {
             barHeight = (absFreq[i] / maxHeight) * winHeight;
             coordY = vpHeight - (margin + barHeight);
 
-            result[i][0] = coordX;
-            result[i][1] = coordY;
-            result[i][2] = barHeight;
-            //System.out.println("X " + result[i][0]);
-            //System.out.println("Y " + result[i][1]);
-            //System.out.println("Bar " + result[i][2]);
+            bars[i] = new Bar(coordX, coordY, barWidth, barHeight, Color.BLUE);
         }
 
-        return result;
+        return bars;
     }
-
 
     public static void main(String[] args) throws IOException {
         double[] data = LogicMath.discData.DiscDataReader.getDiscData("discData.p3");
