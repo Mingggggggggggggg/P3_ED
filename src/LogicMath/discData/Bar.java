@@ -68,15 +68,6 @@ public class Bar {
 
             bars[i] = new Bar(coordX, coordY, barWidth, barHeight, Color.BLUE);
         }
-
         return bars;
-    }
-
-    public static void main(String[] args) throws IOException {
-        double[] data = LogicMath.discData.DiscDataReader.getDiscData("discData.p3");
-        double[] characterExpression = LogicMath.discData.DiscDataReader.getCharExp(data);
-        double[][] result = LogicMath.discData.DiscDataReader.getAbsFreqDouble(characterExpression, data);
-
-        barDimensions(result, 0, 0);
     }
 }

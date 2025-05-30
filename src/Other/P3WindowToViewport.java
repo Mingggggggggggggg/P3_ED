@@ -7,6 +7,14 @@ public class P3WindowToViewport {
     private int vpWidth = 0;
     private int vpHeight = 0;
 
+    /**
+     * 
+     * @param refPoint Referenzpunkt
+     * @param winWidth  Größe der Abbildung
+     * @param winHeight Größe der Abbildung
+     * @param vpWidth   Breite des JPanels
+     * @param vpHeight  Höhe des JPanels
+     */
     public P3WindowToViewport(double[] refPoint, double winWidth,
             double winHeight, int vpWidth, int vpHeight) {
         minX = refPoint[0];

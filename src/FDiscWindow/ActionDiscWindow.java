@@ -73,11 +73,13 @@ public class ActionDiscWindow implements ActionListener {
                     instance.updateTable();
 
                     double[][] absFreqDouble = LogicMath.discData.DiscDataReader.getAbsFreqDouble(charExpDouble, data);
+                    JPanel toDraw = instance.getDataDiagram();
                     int panelHeight = instance.getDataDiagram().getHeight();
                     int panelWidth = instance.getDataDiagram().getWidth();
                     Bar[] bars = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
 
                     // TODO DIAGRAMME ZEICHENN
+
 
                     break;
                 } catch (IOException e1) {
