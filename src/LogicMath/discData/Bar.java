@@ -2,7 +2,6 @@
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.io.IOException;
 import java.util.Arrays;
 
 import Other.P3WindowToViewport;
@@ -23,24 +22,25 @@ public class Bar {
         this.color = color;
     }
 
-    public void drawBar(Graphics2D g, P3WindowToViewport converter) {
-        double[] topLeft = { x, y + height };
-        double[] bottomRight = { x + width, y };
-        int[] topLeftPx = converter.mapAndRound(topLeft);
-        int[] bottomRightPx = converter.mapAndRound(bottomRight);
-
-        int rectX = topLeftPx[0];
-        int rectY = topLeftPx[1];
-        int rectWidth = bottomRightPx[0] - topLeftPx[0];
-        int rectHeight = bottomRightPx[1] - topLeftPx[1];
-
+    public void drawBar(Graphics2D g) {
         g.setColor(color);
-        g.fillRect(rectX, rectY, rectWidth, rectHeight);
+        Rectangle2D.Double bar = new Rectangle2D.Double(x, y, width, height);
+        g.fill(bar);
     }
 
-
+    /** aaaaaaaaaaaaaaaaaaaaaaaa P3WindowToViewport vergessen
+     * Kann hier rein? -> dynamische Skalierung der Balken?
+     * 
+     * @param discDimensions Double Bar Dimensionen anstelle des Object[][]
+     * @param vpHeight
+     * @param vpWidth
+     * @return
+     */
     public static Bar[] barDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
         int amountCharExp = discDimensions.length;
+
+        //double[] origin = { 0, 0 };
+        //P3WindowToViewport converter = new P3WindowToViewport(origin, width, height, width, height);
 
         Bar[] bars = new Bar[amountCharExp];
         double[] absFreq = new double[amountCharExp];
@@ -56,12 +56,11 @@ public class Bar {
         double coordY;
         double barHeight;
 
-        // Extrahiere absolute Häufigkeiten und ermittle den maxWert
+        // Extrahiere absolute Häufigkeiten und ermittle den höchstwert
         for (int i = 0; i < amountCharExp; i++) {
             absFreq[i] = discDimensions[i][1];
             // System.out.println(absFreq[i]);
         }
-
         maxHeight = Arrays.stream(absFreq).max().getAsDouble();
 
         winHeight = vpHeight - (margin * 2);
