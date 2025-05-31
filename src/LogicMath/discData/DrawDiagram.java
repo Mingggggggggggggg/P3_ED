@@ -1,12 +1,12 @@
-﻿package LogicMath;
+﻿package LogicMath.discData;
 
 import Other.P3WindowToViewport;
 import java.awt.*;
 import javax.swing.*;
 
-import LogicMath.discData.Bar;
 
-public class DrawDiagram extends JPanel{
+public class DrawDiagram extends JPanel {
+
     private Bar[] bars;
     private int width;
     private int height;
@@ -25,16 +25,15 @@ public class DrawDiagram extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        double[] origin = {0, 0};
+        double[] origin = { 0, 0 };
         P3WindowToViewport converter = new P3WindowToViewport(origin, width, height, width, height);
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.BLUE);
 
-
-        for(int i = 0; i < bars.length; i++) {
+        for (int i = 0; i < bars.length; i++) {
             Bar bar = bars[i];
-            bar.drawBar(g2d);
+            bar.drawBar(g2d, converter);
         }
 
     }

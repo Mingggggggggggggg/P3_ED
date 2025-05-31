@@ -1,5 +1,6 @@
 ﻿package FDiscWindow;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -9,8 +10,8 @@ import java.util.Arrays;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-import LogicMath.DrawDiagram;
 import LogicMath.discData.Bar;
+import LogicMath.discData.DrawDiagram;
 
 public class ActionDiscWindow implements ActionListener {
     private static ActionDiscWindow instance = null;
@@ -78,7 +79,11 @@ public class ActionDiscWindow implements ActionListener {
                     int panelWidth = instance.getDataDiagram().getWidth();
                     Bar[] bars = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
 
-                    // TODO DIAGRAMME ZEICHENN
+                    DrawDiagram diagramPanel = new DrawDiagram(bars, panelWidth, panelHeight);
+                    diagramPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
+                    instance.setDataDiagram(diagramPanel);
+                    instance.revalidate();
+                    instance.repaint();
 
 
                     break;

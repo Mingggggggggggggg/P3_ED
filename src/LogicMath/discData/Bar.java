@@ -5,6 +5,8 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.util.Arrays;
 
+import Other.P3WindowToViewport;
+
 public class Bar {
 
     private double x;
@@ -21,16 +23,21 @@ public class Bar {
         this.color = color;
     }
 
-    public void drawBar(Graphics2D g) {
+    public void drawBar(Graphics2D g, P3WindowToViewport converter) {
+        double[] topLeft = { x, y + height };
+        double[] bottomRight = { x + width, y };
+        int[] topLeftPx = converter.mapAndRound(topLeft);
+        int[] bottomRightPx = converter.mapAndRound(bottomRight);
+
+        int rectX = topLeftPx[0];
+        int rectY = topLeftPx[1];
+        int rectWidth = bottomRightPx[0] - topLeftPx[0];
+        int rectHeight = bottomRightPx[1] - topLeftPx[1];
+
         g.setColor(color);
-        Rectangle2D.Double bar = new Rectangle2D.Double(x, y, width, height);
-        g.fill(bar);
+        g.fillRect(rectX, rectY, rectWidth, rectHeight);
     }
 
-    // Notiz: Brauche Anzahl der benötigten Balken double[0], ergebend aus Länge der
-    // Merkmalsausprägung \n
-    // Benötige höchstwert der Merkmalsausprägung oder alle abs. Häuf. in double[1],
-    // um Dimensionen in y bestimmen zu können
 
     public static Bar[] barDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
         int amountCharExp = discDimensions.length;
@@ -39,7 +46,7 @@ public class Bar {
         double[] absFreq = new double[amountCharExp];
 
         double maxHeight;
-        int margin = 20;
+        int margin = 17;
 
         int winHeight;
         int winWidth;
@@ -57,12 +64,12 @@ public class Bar {
 
         maxHeight = Arrays.stream(absFreq).max().getAsDouble();
 
-        winHeight = vpHeight - margin;
-        winWidth = vpWidth - margin;
+        winHeight = vpHeight - (margin * 2);
+        winWidth = vpWidth - (margin * 2);
         barWidth = winWidth / (amountCharExp * 2);
 
         for (int i = 0; i < amountCharExp; i++) {
-            coordX = margin + (i * barWidth);
+            coordX = margin + (i * barWidth * 1.275);
             barHeight = (absFreq[i] / maxHeight) * winHeight;
             coordY = vpHeight - (margin + barHeight);
 

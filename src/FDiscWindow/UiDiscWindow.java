@@ -6,6 +6,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
+
+import LogicMath.discData.Bar;
+import LogicMath.discData.DrawDiagram;
 import Other.P3Style;
 
 public class UiDiscWindow extends JPanel {
@@ -17,26 +20,31 @@ public class UiDiscWindow extends JPanel {
         }
         return instance;
     }
+
     ActionDiscWindow adw = ActionDiscWindow.getInstance();
 
-    // -------------------------------------------- Tabelle --------------------------------------------
+    // -------------------------------------------- Tabelle
+    // --------------------------------------------
     String[] columnNames = {
     };
- 
+
     public void setColumnNames(String[] columnNames) {
         this.columnNames = columnNames;
     }
+
     Object[][] data = {
-        {}
+            {}
     };
+
     public void setData(Object[][] data) {
         this.data = data;
     }
-    // --------------------------------------------- /Tabelle ---------------------------------------------
-
+    // --------------------------------------------- /Tabelle
+    // ---------------------------------------------
 
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
+
     public String getPathField() {
         return pathField.getText();
     }
@@ -47,11 +55,14 @@ public class UiDiscWindow extends JPanel {
 
     private JButton openDialog = new JButton("Select file");
     private JLabel dataMerkmal = new JLabel("");
+
     public void setDataMerkmal(String merkmal) {
         this.dataMerkmal.setText(merkmal);
     }
+
     private JLabel dataUrliste = new JLabel("Urliste: ");
     private JTextArea rawDataUrliste = new JTextArea();
+
     public JTextArea getRawDataUrliste() {
         return rawDataUrliste;
     }
@@ -59,31 +70,49 @@ public class UiDiscWindow extends JPanel {
     public void setRawDataUrliste(String data) {
         this.rawDataUrliste.setText(data);
     }
+
     private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
+
     public void updateTable() {
         this.dataTable = new JTable(data, columnNames);
         this.dataScrollPane.setViewportView(dataTable);
     }
+
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
+
     public void setDataAverage(double dataAverage) {
         this.dataAverage.setText("Arithmetisches Mittel: " + dataAverage);
     }
 
     private JLabel dataVariance = new JLabel("Empirische Standardabweichung: ");
-    public void setDataVariance(double dataVariance) {
-        this.dataVariance .setText("Empirische Standardabweichung: " + dataVariance);
-    }
-    private JPanel dataDiagram = new JPanel();
 
-    public JPanel getDataDiagram() {
+    public void setDataVariance(double dataVariance) {
+        this.dataVariance.setText("Empirische Standardabweichung: " + dataVariance);
+    }
+
+    private DrawDiagram dataDiagram = new DrawDiagram(new Bar[0], 600, 200);
+
+    public DrawDiagram getDataDiagram() {
         return dataDiagram;
     }
 
-    public void setDataDiagram(JPanel dataDiagram) {
+    public void setDataDiagram(DrawDiagram dataDiagram) {
+        this.remove(this.dataDiagram); // altes Diagramm entfernen
         this.dataDiagram = dataDiagram;
+
+        // Layout-Regeln beibehalten
+        rules.gridy = 9;
+        rules.weighty = 1;
+        rules.fill = GridBagConstraints.BOTH;
+        rules.gridwidth = GridBagConstraints.REMAINDER;
+
+        this.add(this.dataDiagram, rules); // neues Panel einfügen
+        this.revalidate(); // Layout neu berechnen
+        this.repaint(); // neu zeichnen
     }
+
     private GridBagConstraints rules = new GridBagConstraints();
 
     private UiDiscWindow() {
@@ -98,15 +127,14 @@ public class UiDiscWindow extends JPanel {
 
         rules.gridx = 0;
         rules.gridy = 0;
-        //rules.weightx = 1;
+        // rules.weightx = 1;
         rules.insets = new Insets(5, 5, 5, 5);
         rules.anchor = GridBagConstraints.FIRST_LINE_START;
 
         this.setLayout(new GridBagLayout());
-        
+
         this.add(startButton, rules);
 
-    
         rules.gridx = 1;
         rules.anchor = GridBagConstraints.NORTHWEST;
         rules.fill = GridBagConstraints.HORIZONTAL;
@@ -116,7 +144,7 @@ public class UiDiscWindow extends JPanel {
         rules.weighty = 0;
         rules.gridy = 1;
         rules.fill = GridBagConstraints.NONE;
-        //this.add(pathField, rules);
+        // this.add(pathField, rules);
         this.add(openDialog, rules);
 
         rules.gridx = 1;
@@ -142,7 +170,7 @@ public class UiDiscWindow extends JPanel {
         this.add(dataAverage, rules);
 
         rules.gridy = 5;
-        //rules.weighty = 0.1;
+        // rules.weighty = 0.1;
         this.add(dataVariance, rules);
 
         rules.gridy = 7;
@@ -151,19 +179,18 @@ public class UiDiscWindow extends JPanel {
 
         rules.gridy = 8;
         rules.weightx = 1;
+        rules.weighty = 0.2;
         rules.fill = GridBagConstraints.NONE;
         dataScrollPane.setPreferredSize(new Dimension(600, 50));
         this.add(dataScrollPane, rules);
-        
 
         rules.gridy = 9;
         rules.weighty = 1;
         dataDiagram.setBackground(Color.GREEN);
         rules.fill = GridBagConstraints.BOTH;
-        //rules.gridheight = GridBagConstraints.REMAINDER;
+        // rules.gridheight = GridBagConstraints.REMAINDER;
         rules.gridwidth = GridBagConstraints.REMAINDER;
         this.add(dataDiagram, rules);
     }
-
 
 }
