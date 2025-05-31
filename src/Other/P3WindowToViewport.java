@@ -10,10 +10,10 @@ public class P3WindowToViewport {
     /**
      * 
      * @param refPoint Referenzpunkt
-     * @param winWidth  Größe der Abbildung
-     * @param winHeight Größe der Abbildung
-     * @param vpWidth   Breite des JPanels
-     * @param vpHeight  Höhe des JPanels
+     * @param winWidth  Größe des Fensters
+     * @param winHeight Größe des Fensters
+     * @param vpWidth   Breite des JPanels im Fenster
+     * @param vpHeight  Höhe des JPanels im Fenster
      */
     public P3WindowToViewport(double[] refPoint, double winWidth,
             double winHeight, int vpWidth, int vpHeight) {
@@ -27,10 +27,15 @@ public class P3WindowToViewport {
 
     // Map point
     private double[] map(double[] x) {
-        return new double[] { vpWidth / winWidth * (x[0] - minX),
-                vpHeight / winHeight * (minY - x[1]) + vpHeight };
+        return new double[] { 
+            // Mappt X Koordinate zum Faktor des Fensterverhältnisses? vp/win ist immer unter 1
+            vpWidth / winWidth * (x[0] - minX),
+            // Mappt Y Koordinate zum Faktor des Fensterverhältnisses auf eine gewöhnliche kartesische Y-Achse
+            vpHeight / winHeight * (minY - x[1]) + vpHeight 
+        };
     }
 
+    // Runde double Werte auf int
     // Round double value
     private int[] round(double[] x) {
         return new int[] { (int) Math.round(x[0]), (int) Math.round(x[1]) };

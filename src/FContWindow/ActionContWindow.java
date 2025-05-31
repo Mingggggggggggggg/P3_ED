@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import javax.swing.JFileChooser;
 
+import LogicMath.contData.DrawHistogram;
+import LogicMath.contData.Histogram;
+
 public class ActionContWindow implements ActionListener {
     private static ActionContWindow instance = null;
     String path = "";
@@ -42,31 +45,39 @@ public class ActionContWindow implements ActionListener {
 
                     // Setze ausgelesene Daten in JLabel rawDataUrliste ein
                     double[] data = LogicMath.contData.ContDataReader.getContData(path);
-                    instance.setRawDataUrliste(Arrays.toString(data));
-                    instance.getRawDataUrliste().setVisible(true);
-                    // System.out.println(Arrays.toString(data));
-
                     // Berechne und setze arithmetisches Mittel ein
                     double avg = LogicMath.DataBasicMath.getAverage(data);
-                    instance.setDataAverage(avg);
-
                     // Berechne und setze empirische Standardabweichung ein
                     double var = LogicMath.DataBasicMath.getVariance(data);
-                    instance.setDataVariance(var);
-
-                    // Ermittle Klasseneinteilung aus Datei und gebe dieses als Klassennamen in die
-                    // Tabelle ein
+                    // Ermittle Klasseneinteilung aus Datei und gebe dieses als Klassennamen in die Tabelle ein
                     String[] classInterval = LogicMath.contData.ContDataReader.getContClasses(path);
-                    instance.setColumnNames(classInterval);
                     Object[][] freqTable = LogicMath.contData.ContDataReader.dataClassification(data, path);
                     // Transponiere Matrix, damit diese korrekt in der JTable angezeigt werden
                     Object[][] transFreqTable = new Object[1][freqTable.length];
                     for (int i = 0; i < freqTable.length; i++) {
                         transFreqTable[0][i] = freqTable[i][0];
-                        //System.out.println(transFreqTable[0][i]);
+                        // System.out.println(transFreqTable[0][i]);
                     }
+
+                    //double[][] absFreqDouble = LogicMath.discData.DiscDataReader.getAbsFreqDouble(charExpDouble, data);
+                    //int panelHeight = instance.getDataDiagram().getHeight();
+                    //int panelWidth = instance.getDataDiagram().getWidth();
+                    //Histogram[] histograms = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
+
+                    //DrawHistogram drawHistogram = new DrawHistogram(bars, panelWidth, panelHeight);
+                    //drawHistogram.setPreferredSize(new Dimension(panelWidth, panelHeight));
+
+
+                    instance.setRawDataUrliste(Arrays.toString(data));
+                    instance.getRawDataUrliste().setVisible(true);
+                    // System.out.println(Arrays.toString(data));
+                    instance.setDataAverage(avg);
+                    instance.setDataVariance(var);
+                    instance.setColumnNames(classInterval);
                     instance.setData(transFreqTable);
                     instance.updateTable();
+                    //instance.setDataDiagram(drawHistogram);
+                    //instance.repaint();
 
                     break;
                 } catch (IOException e1) {
@@ -80,7 +91,7 @@ public class ActionContWindow implements ActionListener {
                 if (response == JFileChooser.APPROVE_OPTION) {
                     File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                     setPath(file.toString());
-                    //System.out.println(file);
+                    // System.out.println(file);
                     UiContWindow.getInstance().setPathField(file.toString());
                     try {
                         UiContWindow.getInstance()

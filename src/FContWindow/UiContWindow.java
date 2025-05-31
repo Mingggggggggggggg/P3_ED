@@ -6,6 +6,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
+
+import LogicMath.contData.DrawHistogram;
+import LogicMath.contData.Histogram;
 import Other.P3Style;
 
 public class UiContWindow extends JPanel {
@@ -70,7 +73,25 @@ public class UiContWindow extends JPanel {
     public void setDataVariance(double dataVariance) {
         this.dataVariance .setText("Empirische Standardabweichung: " + dataVariance);;
     }
-    private JPanel dataDiagram = new JPanel();
+    private DrawHistogram dataDiagram = new DrawHistogram(new Histogram[0], 600, 200);
+
+    public DrawHistogram getDataDiagram() {
+        return dataDiagram;
+    }
+
+    public void setDataDiagram(DrawHistogram dataDiagram) {
+        this.remove(this.dataDiagram); // altes Diagramm entfernen
+        this.dataDiagram = dataDiagram;
+
+        rules.gridy = 9;
+        rules.weighty = 1;
+        rules.fill = GridBagConstraints.BOTH;
+        rules.gridwidth = GridBagConstraints.REMAINDER;
+
+        this.add(this.dataDiagram, rules);
+        this.revalidate(); 
+        this.repaint(); 
+    }
 
     private GridBagConstraints rules = new GridBagConstraints();
 

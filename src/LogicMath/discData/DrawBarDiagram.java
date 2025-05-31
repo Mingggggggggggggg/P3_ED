@@ -1,24 +1,24 @@
-﻿package LogicMath.contData;
-
-import javax.swing.*;
-
-import LogicMath.discData.Bar;
+﻿package LogicMath.discData;
 
 import java.awt.*;
+import javax.swing.*;
+
 import Other.P3WindowToViewport;
 
-public class DrawHistogram extends JPanel {
-    private Histogram[] histograms;
+public class DrawBarDiagram extends JPanel {
+
+    private Bar[] bars;
     private int width;
     private int height;
 
-    public DrawHistogram(Histogram[] histograms, int width, int height) {
-        this.histograms = histograms;
+    public DrawBarDiagram(Bar[] bars, int width, int height) {
+        this.bars = bars;
         this.width = width;
         this.height = height;
     }
-        public void setHistogram(Histogram[] histograms) {
-        this.histograms = histograms;
+
+    public void setBars(Bar[] bars) {
+        this.bars = bars;
     }
 
     @Override
@@ -38,9 +38,9 @@ public class DrawHistogram extends JPanel {
         //RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //g2d.setRenderingHints(rh);
 
-        for (int i = 0; i < histograms.length; i++) {
-            Histogram hg = histograms[i];
-            hg.drawHistogram(g2d, converter);
+        for (int i = 0; i < bars.length; i++) {
+            Bar bar = bars[i];
+            bar.drawBar(g2d, converter);
         }
         // Zeichne Achsen
         int[] xAxisStart= converter.mapAndRound(new double[] {padding + 0,padding +  0});

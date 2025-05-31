@@ -11,7 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 import LogicMath.discData.Bar;
-import LogicMath.discData.DrawDiagram;
+import LogicMath.discData.DrawBarDiagram;
 
 public class ActionDiscWindow implements ActionListener {
     private static ActionDiscWindow instance = null;
@@ -48,21 +48,12 @@ public class ActionDiscWindow implements ActionListener {
 
                     // Setze ausgelesene Daten in JLabel rawDataUrliste ein
                     double[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
-                    // System.out.println(Arrays.toString(data));
-                    instance.setRawDataUrliste(Arrays.toString(data));
-                    instance.getRawDataUrliste().setVisible(true);
-
                     // Berechne und setze arithmetisches Mittel ein
                     double avg = LogicMath.DataBasicMath.getAverage(data);
-                    instance.setDataAverage(avg);
                     // Berechne und setze empirische Standardabweichung ein
                     double var = LogicMath.DataBasicMath.getVariance(data);
-                    instance.setDataVariance(var);
-
                     // Extrahiere und setze Merkmalsausprägung für die Tabelle ein
                     String[] charExp = LogicMath.discData.DiscDataReader.getCharExpString(data);
-                    instance.setColumnNames(charExp);
-                    // System.out.println(Arrays.toString(charExp));
                     double[] charExpDouble = LogicMath.discData.DiscDataReader.getCharExp(data);
                     Object[][] freqTable = LogicMath.discData.DiscDataReader.getAbsFreq(charExpDouble, data);
                     // Transponiere Matrix, damit diese korrekt in der JTable angezeigt werden
@@ -70,21 +61,26 @@ public class ActionDiscWindow implements ActionListener {
                     for (int i = 0; i < freqTable.length; i++) {
                         transFreqTable[0][i] = freqTable[i][1];
                     }
-                    instance.setData(transFreqTable);
-                    instance.updateTable();
-
                     double[][] absFreqDouble = LogicMath.discData.DiscDataReader.getAbsFreqDouble(charExpDouble, data);
-                    JPanel toDraw = instance.getDataDiagram();
                     int panelHeight = instance.getDataDiagram().getHeight();
                     int panelWidth = instance.getDataDiagram().getWidth();
                     Bar[] bars = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
 
-                    DrawDiagram diagramPanel = new DrawDiagram(bars, panelWidth, panelHeight);
+                    DrawBarDiagram diagramPanel = new DrawBarDiagram(bars, panelWidth, panelHeight);
                     diagramPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
-                    instance.setDataDiagram(diagramPanel);
-                    instance.revalidate();
-                    instance.repaint();
 
+
+                    // System.out.println(Arrays.toString(data));
+                    instance.setRawDataUrliste(Arrays.toString(data));
+                    instance.getRawDataUrliste().setVisible(true);
+                    instance.setDataAverage(avg);
+                    instance.setDataVariance(var);
+                    instance.setColumnNames(charExp);
+                    // System.out.println(Arrays.toString(charExp));
+                    instance.setData(transFreqTable);
+                    instance.updateTable();
+                    instance.setDataDiagram(diagramPanel);
+                    instance.repaint();
 
                     break;
                 } catch (IOException e1) {

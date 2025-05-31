@@ -1,26 +1,19 @@
-﻿package LogicMath.discData;
+﻿package LogicMath.contData;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.Arrays;
+
 import Other.P3WindowToViewport;
 
-public class Bar {
-
+public class Histogram {
     private double x;
     private double y;
     private double width;
     private double height;
     private Color color;
 
-    /**
-     * 
-     * @param x Koordinate x
-     * @param y Koordinate y
-     * @param width Balkenbreite
-     * @param height Balkenhöhe
-     * @param color Farbe
-     */
-    public Bar(double x, double y, double width, double height, Color color) {
+    public Histogram(double x, double y, double width, double height, Color color) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -53,8 +46,8 @@ public class Bar {
      * @param g
      * @param converter
      */
-    public void drawBar(Graphics2D g, P3WindowToViewport converter) {
-        // Setze den ersten Punkt auf "unten" links vom Balken 
+    public void drawHistogram(Graphics2D g, P3WindowToViewport converter) {
+        // Setze den ersten Punkt auf "unten" links vom Balken
         double[] point1 = {
                 this.x,
                 this.y
@@ -86,34 +79,37 @@ public class Bar {
      * @param vpWidth
      * @return
      */
-    public static Bar[] barDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
+    public static Histogram[] histogramDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
         int amountCharExp = discDimensions.length;
-        Bar[] bars = new Bar[amountCharExp];
+        Histogram[] histogram = new Histogram[amountCharExp];
         double[] absFreq = new double[amountCharExp];
 
         double maxHeight;
         int margin = 30;
 
-        double barWidth;
+        double histogramWidth;
         double coordX;
         double coordY;
-        double barHeight;
+        double histogramHeight;
 
-        // Hole absolute Häufigkeiten aus discDimensions (double[][] war einfacher als Object[][] zu double[])
+        // Hole absolute Häufigkeiten aus discDimensions (double[][] war einfacher als
+        // Object[][] zu double[])
         for (int i = 0; i < amountCharExp; i++) {
             absFreq[i] = discDimensions[i][1];
         }
         maxHeight = Arrays.stream(absFreq).max().getAsDouble();
-        // Berechne Balkenbreite anhand des möglichen Platzes und anzahl der benötigten Balken
-        barWidth = (vpWidth - 2 * margin) / (amountCharExp * 1.5);
+        // Berechne Balkenbreite anhand des möglichen Platzes und anzahl der benötigten
+        // Balken
+        histogramWidth = (vpWidth - 2 * margin) / (amountCharExp * 1.5);
 
-        // Setze die Ursprungskoordinaten fest und addiere Abstand drauf, die zuvor abgezogen wurden
+        // Setze die Ursprungskoordinaten fest und addiere Abstand drauf, die zuvor
+        // abgezogen wurden
         for (int i = 0; i < amountCharExp; i++) {
-            coordX = margin + (i * barWidth * 1.5);
-            barHeight = (absFreq[i] / maxHeight) * (vpHeight - 2 * margin);
+            coordX = margin + (i * histogramWidth * 1.5);
+            histogramHeight = (absFreq[i] / maxHeight) * (vpHeight - 2 * margin);
             coordY = 0;
-            bars[i] = new Bar(coordX, coordY, barWidth, barHeight, Color.BLUE);
+            histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight, Color.BLUE);
         }
-        return bars;
+        return histogram;
     }
 }

@@ -8,7 +8,7 @@ import java.awt.Insets;
 import javax.swing.*;
 
 import LogicMath.discData.Bar;
-import LogicMath.discData.DrawDiagram;
+import LogicMath.discData.DrawBarDiagram;
 import Other.P3Style;
 
 public class UiDiscWindow extends JPanel {
@@ -92,25 +92,23 @@ public class UiDiscWindow extends JPanel {
         this.dataVariance.setText("Empirische Standardabweichung: " + dataVariance);
     }
 
-    private DrawDiagram dataDiagram = new DrawDiagram(new Bar[0], 600, 200);
+    private DrawBarDiagram dataDiagram = new DrawBarDiagram(new Bar[0], 600, 200);
 
-    public DrawDiagram getDataDiagram() {
+    public DrawBarDiagram getDataDiagram() {
         return dataDiagram;
     }
 
-    public void setDataDiagram(DrawDiagram dataDiagram) {
-        this.remove(this.dataDiagram); // altes Diagramm entfernen
+    public void setDataDiagram(DrawBarDiagram dataDiagram) {
+        this.remove(this.dataDiagram); 
         this.dataDiagram = dataDiagram;
 
-        // Layout-Regeln beibehalten
+        // Ursprüngliche Regeln beibehalten
         rules.gridy = 9;
         rules.weighty = 1;
         rules.fill = GridBagConstraints.BOTH;
         rules.gridwidth = GridBagConstraints.REMAINDER;
 
-        this.add(this.dataDiagram, rules); // neues Panel einfügen
-        this.revalidate(); // Layout neu berechnen
-        this.repaint(); // neu zeichnen
+        this.add(this.dataDiagram, rules);
     }
 
     private GridBagConstraints rules = new GridBagConstraints();
@@ -186,7 +184,7 @@ public class UiDiscWindow extends JPanel {
 
         rules.gridy = 9;
         rules.weighty = 1;
-        dataDiagram.setBackground(Color.GREEN);
+        //dataDiagram.setBackground(Color.GREEN);
         rules.fill = GridBagConstraints.BOTH;
         // rules.gridheight = GridBagConstraints.REMAINDER;
         rules.gridwidth = GridBagConstraints.REMAINDER;
