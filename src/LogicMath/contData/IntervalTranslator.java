@@ -107,12 +107,14 @@ public class IntervalTranslator {
                 range[min] = Double.parseDouble(select[0]);
                 range[max] = Double.parseDouble(select[1]);
 
+                /*
                 if (range[min] > range[max]) {
                     double temp = 0;
                     temp = range[min];
                     range[min] = range[max];
                     range[max] = temp;
                 }
+                     */
 
                 break;
             default:

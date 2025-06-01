@@ -1,9 +1,6 @@
 ﻿package LogicMath.contData;
 
 import javax.swing.*;
-
-import LogicMath.discData.Bar;
-
 import java.awt.*;
 import Other.P3WindowToViewport;
 

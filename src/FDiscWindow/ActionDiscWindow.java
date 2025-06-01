@@ -69,7 +69,6 @@ public class ActionDiscWindow implements ActionListener {
                     DrawBarDiagram diagramPanel = new DrawBarDiagram(bars, panelWidth, panelHeight);
                     diagramPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
 
-
                     // System.out.println(Arrays.toString(data));
                     instance.setRawDataUrliste(Arrays.toString(data));
                     instance.getRawDataUrliste().setVisible(true);

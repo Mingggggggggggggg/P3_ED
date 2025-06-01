@@ -183,22 +183,25 @@ public class ContDataReader {
             double[] range = IntervalTranslator.getIntervalEncoder(classesString[i]);
 
             for (int j = 0; j < data.length; j++) {
+                // Wenn untere Grenze offen
                 if (range[2] == 0) {
-                    if (data[j] <= range[0]) {
+                    if (!(data[j] > range[0])) {
                         continue;
                     }
+                    // Wenn untere Grenze geschlossen
                 } else if (range[2] == 1) {
-                    if (data[j] < range[0]) {
+                    if (!(data[j] >= range[0])) {
                         continue;
                     }
                 }
-
+                // Bei obere Grenze offen
                 if (range[3] == 0) {
-                    if (data[j] >= range[1]) {
+                    if (!(data[j] < range[1])) {
                         continue;
                     }
+                    // Wenn obere Grenze geschlossen
                 } else if (range[3] == 1) {
-                    if (data[j] > range[1]) {
+                    if (!(data[j] <= range[1])) {
                         continue;
                     }
                 }
@@ -206,9 +209,52 @@ public class ContDataReader {
                 count++;
             }
 
-            result[i][0] = count;   // Häufigkeit im Intervall
-            result[i][1] = classesString[i];    // Klassenintervall
-            // System.out.println(Arrays.toString(result[i]));
+            result[i][0] = count; // Häufigkeit im Intervall
+            result[i][1] = classesString[i]; // Klassenintervall
+            // System.out.println((result[i][1]));
+        }
+        return result;
+    }
+
+    public static double[][] dataClassificationDouble(double[] data, String filePath) throws IOException {
+        String[] classesString = getContClasses(filePath);
+        double[][] result = new double[classesString.length][];
+
+        for (int i = 0; i < classesString.length; i++) {
+            int count = 0;
+            double[] range = IntervalTranslator.getIntervalEncoder(classesString[i]);
+
+            for (int j = 0; j < data.length; j++) {
+                // Wenn untere Grenze offen
+                if (range[2] == 0) {
+                    if (!(data[j] > range[0])) {
+                        continue;
+                    }
+                    // Wenn untere Grenze geschlossen
+                } else if (range[2] == 1) {
+                    if (!(data[j] >= range[0])) {
+                        continue;
+                    }
+                }
+                // Bei obere Grenze offen
+                if (range[3] == 0) {
+                    if (!(data[j] < range[1])) {
+                        continue;
+                    }
+                    // Wenn obere Grenze geschlossen
+                } else if (range[3] == 1) {
+                    if (!(data[j] <= range[1])) {
+                        continue;
+                    }
+                }
+
+                count++;
+            }
+            result[i] = new double[3];
+            result[i][0] = count;
+            result[i][1] = range[0];
+            result[i][2] = range[1];
+
         }
         return result;
     }
@@ -227,18 +273,18 @@ public class ContDataReader {
         boolean hasNegativeInfinity;
         boolean hasPositiveInfinity;
         for (int i = 0; i < encodedClasses.length; i++) {
-            
-        }
-    }
-/*
-    public static void main(String[] args) throws IOException {
-        String filePath = "contData.p3";
-        double[] data = getContData(filePath);
-        Object[][] test = dataClassification(data, filePath);
 
-        for (int i = 0; i < test.length; i++) {
-            System.out.println(test[i][1].toString());
         }
     }
- */
+    /*
+     * public static void main(String[] args) throws IOException {
+     * String filePath = "contData.p3";
+     * double[] data = getContData(filePath);
+     * Object[][] test = dataClassification(data, filePath);
+     * 
+     * for (int i = 0; i < test.length; i++) {
+     * System.out.println(test[i][1].toString());
+     * }
+     * }
+     */
 }

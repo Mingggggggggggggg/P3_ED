@@ -2,6 +2,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.io.IOException;
 import java.util.Arrays;
 
 import Other.P3WindowToViewport;
@@ -74,15 +75,16 @@ public class Histogram {
 
     /**
      * 
-     * @param discDimensions Double Bar Dimensionen anstelle des Object[][]
+     * @param contDimensions Double Bar Dimensionen anstelle des Object[][]
      * @param vpHeight
      * @param vpWidth
      * @return
      */
-    public static Histogram[] histogramDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
-        int amountCharExp = discDimensions.length;
+    public static Histogram[] histogramDimensions(double[][] contDimensions, int vpHeight, int vpWidth) {
+        int amountCharExp = contDimensions.length;
         Histogram[] histogram = new Histogram[amountCharExp];
         double[] absFreq = new double[amountCharExp];
+        double[] range = new double[contDimensions[0].length * 2]; // Doppelte Grenzen wie Intervalle
 
         double maxHeight;
         int margin = 30;
@@ -95,8 +97,13 @@ public class Histogram {
         // Hole absolute Häufigkeiten aus discDimensions (double[][] war einfacher als
         // Object[][] zu double[])
         for (int i = 0; i < amountCharExp; i++) {
-            absFreq[i] = discDimensions[i][1];
+            absFreq[i] = contDimensions[i][0];
+            range[i] = contDimensions[i][1];
+            System.out.println(absFreq[i] + " " + range[i]);
         }
+
+
+        /* 
         maxHeight = Arrays.stream(absFreq).max().getAsDouble();
         // Berechne Balkenbreite anhand des möglichen Platzes und anzahl der benötigten
         // Balken
@@ -110,6 +117,14 @@ public class Histogram {
             coordY = 0;
             histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight, Color.BLUE);
         }
+            */
         return histogram;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        double[] data = LogicMath.contData.ContDataReader.getContData("contData.p3");
+        double[][] result = LogicMath.contData.ContDataReader.dataClassificationDouble(data, "contData.p3");
+        histogramDimensions(result, 0, 0);
     }
 }
