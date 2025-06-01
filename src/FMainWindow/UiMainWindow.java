@@ -5,15 +5,14 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import Other.P3Style;
 
 public class UiMainWindow extends JPanel {
     ActionMainWindow amw = ActionMainWindow.getInstance();
 
-    private JButton startDiscButton = new JButton("startDisc");
-    private JButton startContButton = new JButton("startCont");
-    private JButton exitButton = new JButton("Exit");
+    private JButton startDiscButton = new JButton("Diskrete Daten");
+    private JButton startContButton = new JButton("Stetige Daten");
+    private JButton exitButton = new JButton("Verlassen");
     private GridBagConstraints rules = new GridBagConstraints();
 
     public UiMainWindow() {

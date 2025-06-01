@@ -1,12 +1,10 @@
 ﻿package FContWindow;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
-
 import LogicMath.contData.DrawHistogram;
 import LogicMath.contData.Histogram;
 import Other.P3Style;
@@ -20,21 +18,26 @@ public class UiContWindow extends JPanel {
         }
         return instance;
     }
+
     ActionContWindow acw = ActionContWindow.getInstance();
-        String[] columnNames = {
+    String[] columnNames = {
     };
- 
+
     public void setColumnNames(String[] columnNames) {
         this.columnNames = columnNames;
     }
+
     Object[][] data = {
-        {}
+            {}
     };
+
     public void setData(Object[][] data) {
         this.data = data;
     }
+
     private JButton startButton = new JButton("Start");
     private JLabel pathField = new JLabel("Datei auswählen");
+
     public String getPathField() {
         return pathField.getText();
     }
@@ -43,13 +46,16 @@ public class UiContWindow extends JPanel {
         this.pathField.setText(path);
     }
 
-    private JButton openDialog = new JButton("Select file");
+    private JButton openDialog = new JButton("Datei auswählen");
     private JLabel dataMerkmal = new JLabel("");
+
     public void setDataMerkmal(String merkmal) {
         this.dataMerkmal.setText(merkmal);
     }
+
     private JLabel dataUrliste = new JLabel("Urliste: ");
     private JTextArea rawDataUrliste = new JTextArea();
+
     public JTextArea getRawDataUrliste() {
         return rawDataUrliste;
     }
@@ -57,22 +63,29 @@ public class UiContWindow extends JPanel {
     public void setRawDataUrliste(String data) {
         this.rawDataUrliste.setText(data);
     }
+
     private JLabel tableLabel = new JLabel("Klassentabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
+
     public void updateTable() {
         this.dataTable = new JTable(data, columnNames);
         this.dataScrollPane.setViewportView(dataTable);
     }
+
     private JLabel dataAverage = new JLabel("Arithmetisches Mittel: ");
+
     public void setDataAverage(double dataAverage) {
         this.dataAverage.setText("Arithmetisches Mittel: " + dataAverage);
     }
 
     private JLabel dataVariance = new JLabel("Empirische Standardabweichung: ");
+
     public void setDataVariance(double dataVariance) {
-        this.dataVariance .setText("Empirische Standardabweichung: " + dataVariance);;
+        this.dataVariance.setText("Empirische Standardabweichung: " + dataVariance);
+        ;
     }
+
     private DrawHistogram dataDiagram = new DrawHistogram(new Histogram[0], 600, 200);
 
     public DrawHistogram getDataDiagram() {
@@ -80,7 +93,7 @@ public class UiContWindow extends JPanel {
     }
 
     public void setDataDiagram(DrawHistogram dataDiagram) {
-        this.remove(this.dataDiagram); 
+        this.remove(this.dataDiagram);
         this.dataDiagram = dataDiagram;
 
         rules.gridy = 9;
@@ -89,8 +102,6 @@ public class UiContWindow extends JPanel {
         rules.gridwidth = GridBagConstraints.REMAINDER;
 
         this.add(this.dataDiagram, rules);
-        this.revalidate(); 
-        this.repaint(); 
     }
 
     private GridBagConstraints rules = new GridBagConstraints();
@@ -102,20 +113,20 @@ public class UiContWindow extends JPanel {
 
         openDialog.setActionCommand("openFile");
         openDialog.addActionListener(acw);
+        openDialog.setFont(P3Style.TEXT_FONT);
 
         dataMerkmal.setFont(P3Style.TITLE_FONT);
 
         rules.gridx = 0;
         rules.gridy = 0;
-        //rules.weightx = 1;
+        // rules.weightx = 1;
         rules.insets = new Insets(5, 5, 5, 5);
         rules.anchor = GridBagConstraints.FIRST_LINE_START;
 
         this.setLayout(new GridBagLayout());
-        
+
         this.add(startButton, rules);
 
-    
         rules.gridx = 1;
         rules.anchor = GridBagConstraints.NORTHWEST;
         rules.fill = GridBagConstraints.HORIZONTAL;
@@ -125,7 +136,7 @@ public class UiContWindow extends JPanel {
         rules.weighty = 0;
         rules.gridy = 1;
         rules.fill = GridBagConstraints.NONE;
-        //this.add(pathField, rules);
+        // this.add(pathField, rules);
         this.add(openDialog, rules);
 
         rules.gridx = 1;
@@ -151,7 +162,7 @@ public class UiContWindow extends JPanel {
         this.add(dataAverage, rules);
 
         rules.gridy = 5;
-        //rules.weighty = 0.1;
+        // rules.weighty = 0.1;
         this.add(dataVariance, rules);
 
         rules.gridy = 7;
@@ -164,16 +175,14 @@ public class UiContWindow extends JPanel {
         rules.fill = GridBagConstraints.NONE;
         dataScrollPane.setPreferredSize(new Dimension(600, 50));
         this.add(dataScrollPane, rules);
-        
 
         rules.gridy = 9;
         rules.weighty = 1;
-        dataDiagram.setBackground(Color.GREEN);
+        // dataDiagram.setBackground(Color.GREEN);
         rules.fill = GridBagConstraints.BOTH;
-        //rules.gridheight = GridBagConstraints.REMAINDER;
+        // rules.gridheight = GridBagConstraints.REMAINDER;
         rules.gridwidth = GridBagConstraints.REMAINDER;
         this.add(dataDiagram, rules);
     }
-
 
 }

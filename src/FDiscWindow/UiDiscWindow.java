@@ -1,12 +1,10 @@
 ﻿package FDiscWindow;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.*;
-
 import LogicMath.discData.Bar;
 import LogicMath.discData.DrawBarDiagram;
 import Other.P3Style;
@@ -53,7 +51,7 @@ public class UiDiscWindow extends JPanel {
         this.pathField.setText(path);
     }
 
-    private JButton openDialog = new JButton("Select file");
+    private JButton openDialog = new JButton("Datei auswählen");
     private JLabel dataMerkmal = new JLabel("");
 
     public void setDataMerkmal(String merkmal) {
@@ -120,7 +118,8 @@ public class UiDiscWindow extends JPanel {
 
         openDialog.setActionCommand("openFile");
         openDialog.addActionListener(adw);
-
+        openDialog.setFont(P3Style.TEXT_FONT);
+        
         dataMerkmal.setFont(P3Style.TITLE_FONT);
 
         rules.gridx = 0;

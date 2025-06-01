@@ -11,7 +11,7 @@ public class MainWindow extends JFrame {
 
         this.setSize(200, 200);
         this.setResizable(false);
-        this.setLocation(500, 100);
+        this.setLocation(50, 50);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         add(uiElements);

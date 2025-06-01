@@ -2,9 +2,9 @@
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.io.IOException;
 import java.util.Arrays;
 
+import Other.P3Style;
 import Other.P3WindowToViewport;
 
 public class Histogram {
@@ -43,17 +43,20 @@ public class Histogram {
     }
 
     /**
+     * Diese Methode zeichnet die Objekte. Dabei werden die Koordinaten der
+     * Rechtecke
+     * mittels der P3WindowToViewport auf das Panel gemappt
      * 
-     * @param g
-     * @param converter
+     * @param g         Graphics g
+     * @param converter P3WindowToViewport
      */
     public void drawHistogram(Graphics2D g, P3WindowToViewport converter) {
-        // Setze den ersten Punkt auf "unten" links vom Balken
+        // Setze den ersten Punkt auf "unten" links vom Rechteck
         double[] point1 = {
                 this.x,
                 this.y
         };
-        // Setze den zweiten Punkt auf "oben" rechts vom Balken
+        // Setze den zweiten Punkt auf "oben" rechts vom Rechteck
         double[] point2 = {
                 this.x + this.width,
                 this.y + this.height
@@ -74,10 +77,13 @@ public class Histogram {
     }
 
     /**
+     * Diese Methode ermittelt die Dimensionen der Histogramme. Genau wie bei der
+     * barDimensions Methode in der Bar-Klasse musste double[][] anstelle eines
+     * Object[][] gewechselt werden
      * 
-     * @param contDimensions Double Bar Dimensionen anstelle des Object[][]
-     * @param vpHeight
-     * @param vpWidth
+     * @param contDimensions double Dimensionen anstelle des Object[][]
+     * @param vpHeight       Panelhöhe
+     * @param vpWidth        Panelbreite
      * @return
      */
     public static Histogram[] histogramDimensions(double[][] contDimensions, int vpHeight, int vpWidth) {
@@ -117,7 +123,7 @@ public class Histogram {
             freqDens[i] = absFreq[i] / classWidth[i];
             // System.out.println(lowerRange[i]);
             // System.out.println(upperRange[i]);
-            System.out.println(classWidth[i]);
+            // System.out.println(classWidth[i]);
         }
 
         maxHeight = Arrays.stream(freqDens).max().getAsDouble();
@@ -135,18 +141,10 @@ public class Histogram {
             coordX = nextHistogramX;
             histogramHeight = (freqDens[i] / maxHeight) * (vpHeight - 2 * margin);
             coordY = 0;
-            histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight, Color.RED);
+            histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight, P3Style.COLOR_GRAPH_B);
 
             nextHistogramX += histogramWidth; // Verschiebe x für nächsten Balken
         }
-
         return histogram;
-    }
-
-    public static void main(String[] args) throws IOException {
-
-        double[] data = LogicMath.contData.ContDataReader.getContData("contData.p3");
-        double[][] result = LogicMath.contData.ContDataReader.dataClassificationDouble(data, "contData.p3");
-        histogramDimensions(result, 0, 0);
     }
 }

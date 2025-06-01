@@ -6,10 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-
 import LogicMath.discData.Bar;
 import LogicMath.discData.DrawBarDiagram;
 

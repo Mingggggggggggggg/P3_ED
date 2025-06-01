@@ -5,7 +5,7 @@ import FMainWindow.MainWindow;
 
 public class Start {
     public static void main(String[] args) throws Exception {
-        MainWindow window = new MainWindow("Main");
+        MainWindow window = new MainWindow("Hauptmenü");
         window.setVisible(true);
     }
 }

@@ -2,7 +2,7 @@
 
 import java.awt.*;
 import java.util.Arrays;
-import Other.P3WindowToViewport;
+import Other.*;
 
 public class Bar {
 
@@ -13,12 +13,13 @@ public class Bar {
     private Color color;
 
     /**
+     * Balkenobjekt zum dynamischen Erstellen von Balken
      * 
-     * @param x Koordinate x
-     * @param y Koordinate y
-     * @param width Balkenbreite
+     * @param x      Koordinate x
+     * @param y      Koordinate y
+     * @param width  Balkenbreite
      * @param height Balkenhöhe
-     * @param color Farbe
+     * @param color  Farbe
      */
     public Bar(double x, double y, double width, double height, Color color) {
         this.x = x;
@@ -49,12 +50,14 @@ public class Bar {
     }
 
     /**
+     * Diese Methode zeichnet die Objekte. Dabei werden die Koordinaten der Balken
+     * mittels der P3WindowToViewport auf das Panel gemappt
      * 
-     * @param g
-     * @param converter
+     * @param g         Graphics g
+     * @param converter P3WindowToViewport
      */
     public void drawBar(Graphics2D g, P3WindowToViewport converter) {
-        // Setze den ersten Punkt auf "unten" links vom Balken 
+        // Setze den ersten Punkt auf "unten" links vom Balken
         double[] point1 = {
                 this.x,
                 this.y
@@ -80,11 +83,15 @@ public class Bar {
     }
 
     /**
+     * Diese Methode ermittelt die Dimensionen der Balken anhand der erforderlichen
+     * Anzahl und der Panelgröße. Ursprünglich war der Paramter discDimensions ein
+     * Object[][], aber wegen Probleme bezüglich des konvertieren zu einem double[]
+     * Array wurde die alte Methode kopiert und angepasst
      * 
      * @param discDimensions Double Bar Dimensionen anstelle des Object[][]
-     * @param vpHeight
-     * @param vpWidth
-     * @return
+     * @param vpHeight       Panelhöhe
+     * @param vpWidth        Panelbreite
+     * @return Bar[] Objekt
      */
     public static Bar[] barDimensions(double[][] discDimensions, int vpHeight, int vpWidth) {
         int amountCharExp = discDimensions.length;
@@ -99,20 +106,23 @@ public class Bar {
         double coordY;
         double barHeight;
 
-        // Hole absolute Häufigkeiten aus discDimensions (double[][] war einfacher als Object[][] zu double[])
+        // Hole absolute Häufigkeiten aus discDimensions (double[][] war einfacher als
+        // Object[][] zu double[])
         for (int i = 0; i < amountCharExp; i++) {
             absFreq[i] = discDimensions[i][1];
         }
         maxHeight = Arrays.stream(absFreq).max().getAsDouble();
-        // Berechne Balkenbreite anhand des möglichen Platzes und anzahl der benötigten Balken
+        // Berechne Balkenbreite anhand des möglichen Platzes und anzahl der benötigten
+        // Balken
         barWidth = (vpWidth - 2 * margin) / (amountCharExp * 1.5);
 
-        // Setze die Ursprungskoordinaten fest und addiere Abstand drauf, die zuvor abgezogen wurden
+        // Setze die Ursprungskoordinaten fest und addiere Abstand drauf, die zuvor
+        // abgezogen wurden
         for (int i = 0; i < amountCharExp; i++) {
             coordX = margin + (i * barWidth * 1.5);
             barHeight = (absFreq[i] / maxHeight) * (vpHeight - 2 * margin);
             coordY = 0;
-            bars[i] = new Bar(coordX, coordY, barWidth, barHeight, Color.BLUE);
+            bars[i] = new Bar(coordX, coordY, barWidth, barHeight, P3Style.COLOR_GRAPH_A);
         }
         return bars;
     }

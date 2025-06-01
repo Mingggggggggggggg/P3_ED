@@ -161,7 +161,6 @@ public class DiscDataReader {
     public static Object[][] getAbsFreq(double[] expression, double[] data) {
         Object[][] result = new Object[expression.length][2];
         double[] toSort = LogicMath.QuickSort.quicksort(data);
-        // LogicMath.QuickSort.output(data);
 
         for (int i = 0; i < expression.length; i++) {
             double current = expression[i];

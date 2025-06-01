@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.swing.JFileChooser;
-
 import LogicMath.contData.DrawHistogram;
 import LogicMath.contData.Histogram;
 

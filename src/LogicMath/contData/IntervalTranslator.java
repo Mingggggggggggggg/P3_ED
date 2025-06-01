@@ -3,13 +3,19 @@
 public class IntervalTranslator {
 
     /**
-     * Diese Lösung hatte ich mir viel eleganter vorgestellt.
-     * Ich wollte tief verschachtelte if-Anweisungen vermeiden
-     * und mag persönlich auch gerne switch-cases
+     * Diese Methode enkodiert die Klassenintervall Strings von bspw. (10-15] zu
+     * range[] = {10, 15, 0, 1}. range[0 und 1] geben jeweils die untere und obere
+     * Grenze wieder. range[2 und 3] zeigen an, ob es sich um eine offene bzw.
+     * geschlossene Grenze handelt; 0 für offen und 1 für geschlossen.
+     * Diese Lösung sah in meinem Kopf viel eleganter aus, aber scheint wegen der
+     * switch-cases etwas lang geraten zu sein. Ich mag switch-cases sehr und wollte
+     * tief verschachtelte if-Anweisungen vermeiden
      * 
      * @param classString Ein Klassenintervall-String aus
      *                    {@link #getContClasses(String)}
-     * @return Gibt Klassenintervall als double Array der Länge 4 zurück
+     * @return Gibt Klassenintervall als double Array der Länge 4 zurück. Das Array
+     *         ist wie folgt kodiert [untere Grenze, obere Grenze, offen[0] oder
+     *         geschlossen[1], offen[0] oder geschlossen[1]
      * 
      * @author Minh
      */
@@ -108,20 +114,20 @@ public class IntervalTranslator {
                 range[max] = Double.parseDouble(select[1]);
 
                 /*
-                if (range[min] > range[max]) {
-                    double temp = 0;
-                    temp = range[min];
-                    range[min] = range[max];
-                    range[max] = temp;
-                }
-                     */
+                 * if (range[min] > range[max]) {
+                 * double temp = 0;
+                 * temp = range[min];
+                 * range[min] = range[max];
+                 * range[max] = temp;
+                 * }
+                 */
 
                 break;
             default:
                 System.err.println("Unbekannter Vergleichsoperator " + classString);
                 break;
         }
-        //LogicMath.contData.ContDataReader.continuityCheck(range);
+        // LogicMath.contData.ContDataReader.continuityCheck(range);
         return range;
     }
 }
