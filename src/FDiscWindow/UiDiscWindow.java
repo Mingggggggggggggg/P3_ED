@@ -72,7 +72,6 @@ public class UiDiscWindow extends JPanel {
     private JLabel tableLabel = new JLabel("Häufigkeitstabelle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
-
     public void updateTable() {
         this.dataTable = new JTable(data, columnNames);
         this.dataScrollPane.setViewportView(dataTable);

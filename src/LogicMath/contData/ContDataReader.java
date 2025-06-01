@@ -283,15 +283,4 @@ public class ContDataReader {
 
         }
     }
-    /*
-     * public static void main(String[] args) throws IOException {
-     * String filePath = "contData.p3";
-     * double[] data = getContData(filePath);
-     * Object[][] test = dataClassification(data, filePath);
-     * 
-     * for (int i = 0; i < test.length; i++) {
-     * System.out.println(test[i][1].toString());
-     * }
-     * }
-     */
 }
