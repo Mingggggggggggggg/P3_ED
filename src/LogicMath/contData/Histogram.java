@@ -84,7 +84,11 @@ public class Histogram {
         int amountCharExp = contDimensions.length;
         Histogram[] histogram = new Histogram[amountCharExp];
         double[] absFreq = new double[amountCharExp];
-        double[] range = new double[contDimensions[0].length * 2]; // Doppelte Grenzen wie Intervalle
+
+        double[] lowerRange = new double[amountCharExp];
+        double[] upperRange = new double[amountCharExp];
+        double[] classWidth = new double[amountCharExp];
+        double[] freqDens = new double[amountCharExp]; // Absolute Häufigkeitsdichte
 
         double maxHeight;
         int margin = 30;
@@ -98,26 +102,39 @@ public class Histogram {
         // Object[][] zu double[])
         for (int i = 0; i < amountCharExp; i++) {
             absFreq[i] = contDimensions[i][0];
-            range[i] = contDimensions[i][1];
-            System.out.println(absFreq[i] + " " + range[i]);
+            lowerRange[i] = contDimensions[i][1];
+            upperRange[i] = contDimensions[i][2];
+
+            // Hardkodiere unendliche Grenzen auf arbiträre Breiten
+            if (lowerRange[i] == Double.NEGATIVE_INFINITY) {
+                classWidth[i] = upperRange[i];
+            } else if (upperRange[i] == Double.POSITIVE_INFINITY) {
+                classWidth[i] = 5;
+            } else {
+                classWidth[i] = upperRange[i] - lowerRange[i];
+            }
+
+            freqDens[i] = absFreq[i] / classWidth[i];
+            // System.out.println(lowerRange[i]);
+            // System.out.println(upperRange[i]);
+            System.out.println(classWidth[i]);
         }
 
+        maxHeight = Arrays.stream(freqDens).max().getAsDouble();
+        // Berechne Histogrammbreite anhand des möglichen Platzes und anzahl der benötigten Histogramme
 
-        /* 
-        maxHeight = Arrays.stream(absFreq).max().getAsDouble();
-        // Berechne Balkenbreite anhand des möglichen Platzes und anzahl der benötigten
-        // Balken
-        histogramWidth = (vpWidth - 2 * margin) / (amountCharExp * 1.5);
 
         // Setze die Ursprungskoordinaten fest und addiere Abstand drauf, die zuvor
         // abgezogen wurden
         for (int i = 0; i < amountCharExp; i++) {
+            histogramWidth =  (vpWidth - 2 * margin) / (classWidth[i]); // ????????????????
             coordX = margin + (i * histogramWidth * 1.5);
-            histogramHeight = (absFreq[i] / maxHeight) * (vpHeight - 2 * margin);
+            histogramHeight = (freqDens[i] / maxHeight) * (vpHeight - 2 * margin);
             coordY = 0;
-            histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight, Color.BLUE);
+            histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight,
+                    Color.BLUE);
         }
-            */
+
         return histogram;
     }
 

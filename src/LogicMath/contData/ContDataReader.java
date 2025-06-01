@@ -218,7 +218,7 @@ public class ContDataReader {
 
     public static double[][] dataClassificationDouble(double[] data, String filePath) throws IOException {
         String[] classesString = getContClasses(filePath);
-        double[][] result = new double[classesString.length][];
+        double[][] result = new double[classesString.length][classesString.length * 2];
 
         for (int i = 0; i < classesString.length; i++) {
             int count = 0;
@@ -250,11 +250,18 @@ public class ContDataReader {
 
                 count++;
             }
-            result[i] = new double[3];
-            result[i][0] = count;
-            result[i][1] = range[0];
-            result[i][2] = range[1];
 
+            result[i][0] = count; // Häufigkeit im Intervall
+            result[i][1] = range[0]; // Untere Grenze
+            result[i][2] = range[1]; // Obere Grenze
+            //System.out.println(range[0]);
+            //System.out.println(range[1]);
+
+            /* 
+            for (int k = 0; k < 2; k++) {
+                result[i + k][1] = range[k]; // Klassenintervall
+                // System.out.println((result[i][1]));
+            }*/
         }
         return result;
     }
