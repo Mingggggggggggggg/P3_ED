@@ -40,10 +40,8 @@ public class P3WindowToViewport {
     private int[] round(double[] x) {
         return new int[] { (int) Math.round(x[0]), (int) Math.round(x[1]) };
     }
-
     // Combine map and round
     public int[] mapAndRound(double[] x) {
         return round(map(x));
     }
-    
 }
