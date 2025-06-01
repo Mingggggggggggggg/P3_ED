@@ -99,7 +99,7 @@ public class UiDiscWindow extends JPanel {
     }
 
     public void setDataDiagram(DrawBarDiagram dataDiagram) {
-        this.remove(this.dataDiagram); 
+        this.remove(this.dataDiagram); // Entferne placeholder
         this.dataDiagram = dataDiagram;
 
         // Ursprüngliche Regeln beibehalten

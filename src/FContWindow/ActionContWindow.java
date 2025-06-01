@@ -1,5 +1,6 @@
 ﻿package FContWindow;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -59,13 +60,13 @@ public class ActionContWindow implements ActionListener {
                         // System.out.println(transFreqTable[0][i]);
                     }
 
-                    //double[][] absFreqDouble = LogicMath.discData.DiscDataReader.getAbsFreqDouble(charExpDouble, data);
-                    //int panelHeight = instance.getDataDiagram().getHeight();
-                    //int panelWidth = instance.getDataDiagram().getWidth();
-                    //Histogram[] histograms = LogicMath.discData.Bar.barDimensions(absFreqDouble, panelHeight, panelWidth);
+                    double[][] absFreqDouble = LogicMath.contData.ContDataReader.dataClassificationDouble(data, path);
+                    int panelHeight = instance.getDataDiagram().getHeight();
+                    int panelWidth = instance.getDataDiagram().getWidth();
+                    Histogram[] histograms = LogicMath.contData.Histogram.histogramDimensions(absFreqDouble, panelHeight, panelWidth);
 
-                    //DrawHistogram drawHistogram = new DrawHistogram(bars, panelWidth, panelHeight);
-                    //drawHistogram.setPreferredSize(new Dimension(panelWidth, panelHeight));
+                    DrawHistogram drawHistogram = new DrawHistogram(histograms, panelWidth, panelHeight);
+                    drawHistogram.setPreferredSize(new Dimension(panelWidth, panelHeight));
 
 
                     instance.setRawDataUrliste(Arrays.toString(data));
@@ -76,8 +77,8 @@ public class ActionContWindow implements ActionListener {
                     instance.setColumnNames(classInterval);
                     instance.setData(transFreqTable);
                     instance.updateTable();
-                    //instance.setDataDiagram(drawHistogram);
-                    //instance.repaint();
+                    instance.setDataDiagram(drawHistogram);
+                    instance.repaint();
 
                     break;
                 } catch (IOException e1) {

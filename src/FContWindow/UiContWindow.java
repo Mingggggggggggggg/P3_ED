@@ -80,7 +80,7 @@ public class UiContWindow extends JPanel {
     }
 
     public void setDataDiagram(DrawHistogram dataDiagram) {
-        this.remove(this.dataDiagram); // altes Diagramm entfernen
+        this.remove(this.dataDiagram); 
         this.dataDiagram = dataDiagram;
 
         rules.gridy = 9;
@@ -160,6 +160,7 @@ public class UiContWindow extends JPanel {
 
         rules.gridy = 8;
         rules.weightx = 1;
+        rules.weighty = 0.2;
         rules.fill = GridBagConstraints.NONE;
         dataScrollPane.setPreferredSize(new Dimension(600, 50));
         this.add(dataScrollPane, rules);

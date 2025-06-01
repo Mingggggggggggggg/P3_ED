@@ -121,18 +121,23 @@ public class Histogram {
         }
 
         maxHeight = Arrays.stream(freqDens).max().getAsDouble();
-        // Berechne Histogrammbreite anhand des möglichen Platzes und anzahl der benötigten Histogramme
-
-
+        // Berechne Histogrammbreite anhand des möglichen Platzes und anzahl der
+        // benötigten Histogramme
+        double totalClassWidth = 0;
+        for (int i = 0; i < amountCharExp; i++) {
+            totalClassWidth += classWidth[i];
+        }
         // Setze die Ursprungskoordinaten fest und addiere Abstand drauf, die zuvor
         // abgezogen wurden
+        double nextHistogramX = 0;
         for (int i = 0; i < amountCharExp; i++) {
-            histogramWidth =  (vpWidth - 2 * margin) / (classWidth[i]); // ????????????????
-            coordX = margin + (i * histogramWidth * 1.5);
+            histogramWidth = ((vpWidth - 2 * margin) * (classWidth[i] / totalClassWidth));
+            coordX = nextHistogramX;
             histogramHeight = (freqDens[i] / maxHeight) * (vpHeight - 2 * margin);
             coordY = 0;
-            histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight,
-                    Color.BLUE);
+            histogram[i] = new Histogram(coordX, coordY, histogramWidth, histogramHeight, Color.RED);
+
+            nextHistogramX += histogramWidth; // Verschiebe x für nächsten Balken
         }
 
         return histogram;
