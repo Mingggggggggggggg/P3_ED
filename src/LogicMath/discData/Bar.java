@@ -20,6 +20,8 @@ public class Bar {
      * @param width  Balkenbreite
      * @param height Balkenhöhe
      * @param color  Farbe
+     * 
+     * @author Minh
      */
     public Bar(double x, double y, double width, double height, Color color) {
         this.x = x;
@@ -55,6 +57,8 @@ public class Bar {
      * 
      * @param g         Graphics g
      * @param converter P3WindowToViewport
+     * 
+     * @author Minh
      */
     public void drawBar(Graphics2D g, P3WindowToViewport converter) {
         // Setze den ersten Punkt auf "unten" links vom Balken

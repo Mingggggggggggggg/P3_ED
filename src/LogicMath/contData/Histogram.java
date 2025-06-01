@@ -14,6 +14,17 @@ public class Histogram {
     private double height;
     private Color color;
 
+    /**
+     * Histogrammobjekt zum dynamischen Erstellen von Histogrammen
+     * 
+     * @param x      Koordinate x
+     * @param y      Koordinate y
+     * @param width  Balkenbreite
+     * @param height Balkenhöhe
+     * @param color  Farbe
+     * 
+     * @author Minh
+     */
     public Histogram(double x, double y, double width, double height, Color color) {
         this.x = x;
         this.y = y;
@@ -49,6 +60,8 @@ public class Histogram {
      * 
      * @param g         Graphics g
      * @param converter P3WindowToViewport
+     * 
+     * @author Minh
      */
     public void drawHistogram(Graphics2D g, P3WindowToViewport converter) {
         // Setze den ersten Punkt auf "unten" links vom Rechteck
