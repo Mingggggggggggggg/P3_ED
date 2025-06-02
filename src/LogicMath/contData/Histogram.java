@@ -16,6 +16,7 @@ public class Histogram {
 
     /**
      * Histogrammobjekt zum dynamischen Erstellen von Histogrammen
+     * Der Aufbau ist angelehnt an: https://youtu.be/zCiMlbu1-aQ?si=h3n5QvURMDIUct2y&t=991 
      * 
      * @param x      Koordinate x
      * @param y      Koordinate y

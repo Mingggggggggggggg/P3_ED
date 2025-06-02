@@ -173,7 +173,8 @@ public class UiContWindow extends JPanel {
         rules.weightx = 1;
         rules.weighty = 0.2;
         rules.fill = GridBagConstraints.NONE;
-        dataScrollPane.setPreferredSize(new Dimension(600, 50));
+        dataScrollPane.setPreferredSize(new Dimension(600, 50)); // Wunschdimension setzen
+        dataScrollPane.setMinimumSize(new Dimension(600, 50)); // Setze minimalgröße, damit die Tabelle sich nicht verschiebt
         this.add(dataScrollPane, rules);
 
         rules.gridy = 9;

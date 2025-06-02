@@ -45,14 +45,18 @@ public class ActionDiscWindow implements ActionListener {
 
                     // Setze ausgelesene Daten in JLabel rawDataUrliste ein
                     double[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
+
                     // Berechne und setze arithmetisches Mittel ein
                     double avg = LogicMath.DataBasicMath.getAverage(data);
+
                     // Berechne und setze empirische Standardabweichung ein
                     double var = LogicMath.DataBasicMath.getVariance(data);
+
                     // Extrahiere und setze Merkmalsausprägung für die Tabelle ein
                     String[] charExp = LogicMath.discData.DiscDataReader.getCharExpString(data);
                     double[] charExpDouble = LogicMath.discData.DiscDataReader.getCharExp(data);
                     Object[][] freqTable = LogicMath.discData.DiscDataReader.getAbsFreq(charExpDouble, data);
+                    
                     // Transponiere Matrix, damit diese korrekt in der JTable angezeigt werden
                     Object[][] transFreqTable = new Object[1][freqTable.length];
                     for (int i = 0; i < freqTable.length; i++) {
@@ -80,6 +84,7 @@ public class ActionDiscWindow implements ActionListener {
 
                     break;
                 } catch (IOException e1) {
+                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
                 break;
