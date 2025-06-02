@@ -80,6 +80,7 @@ public class DiscDataReader {
         // System.out.println(dataLength);
         result = new double[dataLength];
         System.arraycopy(data, 0, result, 0, dataLength);
+        
         return result;
     }
 

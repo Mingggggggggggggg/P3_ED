@@ -44,7 +44,10 @@ public class ActionDiscWindow implements ActionListener {
                     UiDiscWindow instance = UiDiscWindow.getInstance();
 
                     // Setze ausgelesene Daten in JLabel rawDataUrliste ein
+                    // set Methode ist hier, weil data später noch sortiert wird.
                     double[] data = LogicMath.discData.DiscDataReader.getDiscData(path);
+                    instance.setRawDataUrliste(Arrays.toString(data));
+                    instance.getRawDataUrliste().setVisible(true);
 
                     // Berechne und setze arithmetisches Mittel ein
                     double avg = LogicMath.DataBasicMath.getAverage(data);
@@ -71,8 +74,7 @@ public class ActionDiscWindow implements ActionListener {
                     diagramPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
 
                     // System.out.println(Arrays.toString(data));
-                    instance.setRawDataUrliste(Arrays.toString(data));
-                    instance.getRawDataUrliste().setVisible(true);
+
                     instance.setDataAverage(avg);
                     instance.setDataVariance(var);
                     instance.setColumnNames(charExp);
