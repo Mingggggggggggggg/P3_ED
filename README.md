@@ -7,14 +7,14 @@ Dies ist das Programm zur ED in P3, die Datensätze sind entnommen aus:
 Zusätzlich ist der Code, zum öffnen des FileChoosers, an folgende Video angelehnt und teilweise übernommen:
 - https://www.youtube.com/watch?v=A6sA9KItwpY
 
-JTable Refresh aus:
-- https://stackoverflow.com/questions/15619310/jtable-not-updating-itself/15620363#15620363
+Idee für JTable Refresh aus:
+- https://stackoverflow.com/questions/15619310/jtable-not-updating-itself/
 
 ## Ordner Struktur
 
 Diese Abgabe enthält folgende Ordnerstruktur:
-
+- `root`:
+  - `contData.p3`
+  - `discData.p3`
 - `src`: Ordner mit Sourcecode
 - `lib`: Ordner mit Bibliotheken
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
