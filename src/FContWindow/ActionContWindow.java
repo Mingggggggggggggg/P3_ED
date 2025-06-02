@@ -85,6 +85,7 @@ public class ActionContWindow implements ActionListener {
                 }
                 break;
             case "openFile":
+                // Angelehnt und teilweise übernommen aus https://youtu.be/A6sA9KItwpY?si=7aRrMU3ojHs9loe-&t=301
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File("."));
                 int response = fileChooser.showOpenDialog(null);
