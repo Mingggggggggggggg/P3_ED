@@ -272,7 +272,7 @@ public class ContDataReader {
      * Nicht lückenlose Klassen sollen eine Fehlermeldung geben und das Programm
      * schließen.
      * 
-     * @param classesString String aus {@link #getContClasses(String)}
+     * @param encodedClasses Double Array aus {@link #getIntervalEncoder(String)}
      * 
      * @author Minh
      */

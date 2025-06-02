@@ -24,6 +24,7 @@ public class DrawBarDiagram extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // Angelehnt an https://youtu.be/zCiMlbu1-aQ?si=4Nfo9kjAu0NeZP0_&t=699 und Vorlesungsunterlagen
         Graphics2D g2d = (Graphics2D) g;
         int vpWidth = getWidth();
         int vpHeight = getHeight();
