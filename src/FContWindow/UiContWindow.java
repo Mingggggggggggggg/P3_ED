@@ -64,7 +64,7 @@ public class UiContWindow extends JPanel {
         this.rawDataUrliste.setText(data);
     }
 
-    private JLabel tableLabel = new JLabel("Klassentabelle");
+    private JLabel tableLabel = new JLabel("Häufigkeitstablle");
     private JTable dataTable = new JTable(data, columnNames);
     private JScrollPane dataScrollPane = new JScrollPane(dataTable);
     // https://stackoverflow.com/questions/15619310/jtable-not-updating-itself/
