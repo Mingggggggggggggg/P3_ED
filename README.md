@@ -13,8 +13,8 @@ Idee für JTable Refresh aus:
 ## Ordner Struktur
 
 Diese Abgabe enthält folgende Ordnerstruktur:
-
+- `root`:
+  - `contData.p3`
+  - `discData.p3`
 - `src`: Ordner mit Sourcecode
 - `lib`: Ordner mit Bibliotheken
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
