@@ -14,7 +14,8 @@ public class Bar {
 
     /**
      * Balkenobjekt zum dynamischen Erstellen von Balken.
-     * Der Aufbau ist angelehnt an: https://youtu.be/zCiMlbu1-aQ?si=h3n5QvURMDIUct2y&t=991 
+     * Der Aufbau ist angelehnt an:
+     * https://youtu.be/zCiMlbu1-aQ?si=h3n5QvURMDIUct2y&t=991
      * 
      * @param x      Koordinate x
      * @param y      Koordinate y
@@ -78,11 +79,11 @@ public class Bar {
 
         // Setze tatsächliche unten links Koordinate als Ursprung
         int barX = convPoint1[0];
-        int barY = convPoint1[1];
+        int barY = convPoint2[1];
 
         // Ermittle Dimensionen aus der sich der Balken aus dem Ursprung bildet
         int barWidth = convPoint2[0] - convPoint1[0];
-        int barHeight = convPoint2[1] - convPoint1[1];
+        int barHeight = convPoint1[1] - convPoint2[1];
         g.setColor(this.color);
         g.fillRect(barX, barY, barWidth, barHeight);
     }

@@ -81,11 +81,11 @@ public class Histogram {
 
         // Setze tatsächliche unten links Koordinate als Ursprung
         int barX = convPoint1[0];
-        int barY = convPoint1[1];
+        int barY = convPoint2[1];
 
         // Ermittle Dimensionen aus der sich der Balken aus dem Ursprung bildet
         int barWidth = convPoint2[0] - convPoint1[0];
-        int barHeight = convPoint2[1] - convPoint1[1];
+        int barHeight = convPoint1[1] - convPoint2[1];
         g.setColor(this.color);
         g.fillRect(barX, barY, barWidth, barHeight);
     }
